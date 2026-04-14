@@ -1,0 +1,1969 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Examen Digital - Mantenimiento de Laptops</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <style>
+    :root {
+      /* Anthropic-inspired dark theme */
+      --bg-primary: #0a0a0a;
+      --bg-secondary: #141414;
+      --bg-tertiary: #1a1a1a;
+      --bg-elevated: #1f1f1f;
+      --bg-hover: #252525;
+      
+      /* Text colors */
+      --text-primary: #f5f5f5;
+      --text-secondary: #a0a0a0;
+      --text-muted: #666666;
+      
+      /* Accent colors - Anthropic coral/red */
+      --accent-primary: #d97757;
+      --accent-hover: #e8896a;
+      --accent-muted: #8b4535;
+      
+      /* Status colors */
+      --success: #4ade80;
+      --success-bg: rgba(74, 222, 128, 0.1);
+      --danger: #f87171;
+      --danger-bg: rgba(248, 113, 113, 0.1);
+      --warning: #fbbf24;
+      --warning-bg: rgba(251, 191, 36, 0.1);
+      --info: #60a5fa;
+      --info-bg: rgba(96, 165, 250, 0.1);
+      
+      /* Borders */
+      --border-primary: #2a2a2a;
+      --border-secondary: #333333;
+      --border-hover: #404040;
+      
+      /* Spacing */
+      --space-xs: 4px;
+      --space-sm: 8px;
+      --space-md: 16px;
+      --space-lg: 24px;
+      --space-xl: 32px;
+      --space-2xl: 48px;
+      
+      /* Typography */
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      
+      /* Effects */
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 14px;
+      --radius-xl: 20px;
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+      --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+      --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    body {
+      font-family: var(--font-sans);
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    
+    /* Background pattern */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(ellipse at 20% 0%, rgba(217, 119, 87, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 100%, rgba(217, 119, 87, 0.05) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: -1;
+    }
+    
+    /* Main container */
+    .exam-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: var(--space-lg);
+      min-height: 100vh;
+    }
+    
+    /* Header */
+    .exam-header {
+      text-align: center;
+      padding: var(--space-xl) 0;
+      border-bottom: 1px solid var(--border-primary);
+      margin-bottom: var(--space-xl);
+    }
+    
+    .exam-header h1 {
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: var(--space-sm);
+      letter-spacing: -0.5px;
+    }
+    
+    .exam-header .subtitle {
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+    
+    .exam-header .badge {
+      display: inline-block;
+      background: var(--accent-muted);
+      color: var(--accent-primary);
+      font-size: 12px;
+      font-weight: 500;
+      padding: var(--space-xs) var(--space-md);
+      border-radius: 100px;
+      margin-top: var(--space-md);
+    }
+    
+    /* Forms */
+    .form-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-primary);
+      border-radius: var(--radius-lg);
+      padding: var(--space-xl);
+      margin-bottom: var(--space-lg);
+    }
+    
+    .form-group {
+      margin-bottom: var(--space-lg);
+    }
+    
+    .form-group:last-of-type {
+      margin-bottom: 0;
+    }
+    
+    .form-label {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-primary);
+      margin-bottom: var(--space-sm);
+    }
+    
+    .form-label .optional {
+      font-weight: 400;
+      color: var(--text-muted);
+      font-size: 12px;
+    }
+    
+    .form-input {
+      width: 100%;
+      padding: 14px 16px;
+      font-size: 15px;
+      font-family: var(--font-sans);
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-primary);
+      border-radius: var(--radius-md);
+      color: var(--text-primary);
+      transition: var(--transition);
+    }
+    
+    .form-input:focus {
+      outline: none;
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 0 3px rgba(217, 119, 87, 0.15);
+    }
+    
+    .form-input::placeholder {
+      color: var(--text-muted);
+    }
+    
+    .form-input.error {
+      border-color: var(--danger);
+    }
+    
+    .form-error {
+      font-size: 12px;
+      color: var(--danger);
+      margin-top: var(--space-xs);
+      display: none;
+    }
+    
+    .form-error.visible {
+      display: block;
+    }
+    
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-md);
+    }
+    
+    @media (max-width: 600px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-sm);
+      padding: 14px 28px;
+      font-size: 15px;
+      font-weight: 500;
+      font-family: var(--font-sans);
+      border-radius: var(--radius-md);
+      border: none;
+      cursor: pointer;
+      transition: var(--transition);
+      text-decoration: none;
+    }
+    
+    .btn-primary {
+      background: var(--accent-primary);
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      background: var(--accent-hover);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-md);
+    }
+    
+    .btn-secondary {
+      background: var(--bg-tertiary);
+      color: var(--text-primary);
+      border: 1px solid var(--border-primary);
+    }
+    
+    .btn-secondary:hover {
+      background: var(--bg-hover);
+      border-color: var(--border-secondary);
+    }
+    
+    .btn-danger {
+      background: var(--danger-bg);
+      color: var(--danger);
+      border: 1px solid transparent;
+    }
+    
+    .btn-danger:hover {
+      background: rgba(248, 113, 113, 0.2);
+    }
+    
+    .btn-success {
+      background: var(--success-bg);
+      color: var(--success);
+      border: 1px solid transparent;
+    }
+    
+    .btn-success:hover {
+      background: rgba(74, 222, 128, 0.2);
+    }
+    
+    .btn-full {
+      width: 100%;
+    }
+    
+    .btn-lg {
+      padding: 18px 36px;
+      font-size: 16px;
+    }
+    
+    .btn-sm {
+      padding: 8px 16px;
+      font-size: 13px;
+    }
+    
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none !important;
+    }
+    
+    /* Student info bar */
+    .student-bar {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-primary);
+      border-radius: var(--radius-lg);
+      padding: var(--space-md) var(--space-lg);
+      margin-bottom: var(--space-lg);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: var(--space-md);
+    }
+    
+    .student-info {
+      display: flex;
+      align-items: center;
+      gap: var(--space-lg);
+    }
+    
+    .student-info .name {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    
+    .student-info .section {
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+    
+    .student-info .divider {
+      width: 1px;
+      height: 24px;
+      background: var(--border-primary);
+    }
+    
+    .exam-stats {
+      display: flex;
+      align-items: center;
+      gap: var(--space-lg);
+    }
+    
+    .stat-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+    
+    .stat-item .icon {
+      font-size: 16px;
+    }
+    
+    .stat-item .value {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    
+    .timer {
+      font-family: var(--font-mono);
+      font-size: 15px;
+      font-weight: 500;
+      padding: var(--space-sm) var(--space-md);
+      background: var(--bg-tertiary);
+      border-radius: var(--radius-sm);
+      color: var(--text-primary);
+    }
+    
+    .timer.warning {
+      color: var(--warning);
+      animation: pulse 1s infinite;
+    }
+    
+    .timer.danger {
+      color: var(--danger);
+      animation: pulse 0.5s infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+    
+    /* Progress bar */
+    .progress-container {
+      margin-bottom: var(--space-lg);
+    }
+    
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--space-sm);
+    }
+    
+    .progress-label {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+    
+    .progress-values {
+      font-size: 13px;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+    
+    .progress-bar {
+      height: 6px;
+      background: var(--bg-tertiary);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent-primary), var(--accent-hover));
+      border-radius: 3px;
+      transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .progress-fill.success {
+      background: linear-gradient(90deg, var(--success), #22c55e);
+    }
+    
+    /* Exam actions */
+    .exam-actions {
+      display: flex;
+      gap: var(--space-md);
+      justify-content: flex-end;
+      margin-bottom: var(--space-lg);
+    }
+    
+    /* Theme sections */
+    .tema-section {
+      margin-bottom: var(--space-xl);
+    }
+    
+    .tema-label {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      padding-bottom: var(--space-md);
+      margin-bottom: var(--space-md);
+      border-bottom: 1px solid var(--border-primary);
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+    
+    .tema-label .count {
+      font-weight: 400;
+      color: var(--text-muted);
+      font-size: 11px;
+      margin-left: auto;
+    }
+    
+    /* Question cards */
+    .q-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-primary);
+      border-radius: var(--radius-lg);
+      padding: var(--space-lg);
+      margin-bottom: var(--space-md);
+      transition: var(--transition);
+    }
+    
+    .q-card:hover {
+      border-color: var(--border-secondary);
+    }
+    
+    .q-card.answered {
+      border-color: var(--border-secondary);
+    }
+    
+    .q-card.correct-answer {
+      border-color: var(--success);
+      box-shadow: 0 0 0 1px var(--success);
+    }
+    
+    .q-card.wrong-answer {
+      border-color: var(--danger);
+      box-shadow: 0 0 0 1px var(--danger);
+    }
+    
+    .q-header {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-md);
+      margin-bottom: var(--space-md);
+    }
+    
+    .q-number {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 32px;
+      height: 32px;
+      background: var(--bg-tertiary);
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      font-family: var(--font-mono);
+    }
+    
+    .q-card.answered .q-number {
+      background: var(--info-bg);
+      color: var(--info);
+    }
+    
+    .q-card.correct-answer .q-number {
+      background: var(--success-bg);
+      color: var(--success);
+    }
+    
+    .q-card.wrong-answer .q-number {
+      background: var(--danger-bg);
+      color: var(--danger);
+    }
+    
+    .q-text {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text-primary);
+      line-height: 1.6;
+      flex: 1;
+    }
+    
+    .q-status {
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 100px;
+      font-weight: 500;
+    }
+    
+    .q-status.correct {
+      background: var(--success-bg);
+      color: var(--success);
+    }
+    
+    .q-status.incorrect {
+      background: var(--danger-bg);
+      color: var(--danger);
+    }
+    
+    .q-status.pending {
+      background: var(--bg-tertiary);
+      color: var(--text-muted);
+    }
+    
+    /* Options */
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+    
+    .opt {
+      display: flex;
+      align-items: flex-start;
+      gap: var(--space-md);
+      padding: var(--space-md) var(--space-lg);
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-primary);
+      border-radius: var(--radius-md);
+      cursor: pointer;
+      font-size: 14px;
+      color: var(--text-primary);
+      transition: var(--transition);
+    }
+    
+    .opt:hover:not(.disabled) {
+      background: var(--bg-hover);
+      border-color: var(--border-secondary);
+      transform: translateX(4px);
+    }
+    
+    .opt.selected {
+      border-color: var(--info);
+      background: var(--info-bg);
+    }
+    
+    .opt.correct {
+      border-color: var(--success);
+      background: var(--success-bg);
+      color: var(--success);
+    }
+    
+    .opt.wrong {
+      border-color: var(--danger);
+      background: var(--danger-bg);
+      color: var(--danger);
+    }
+    
+    .opt.disabled {
+      cursor: default;
+      pointer-events: none;
+    }
+    
+    .opt-key {
+      font-weight: 600;
+      font-family: var(--font-mono);
+      min-width: 20px;
+      color: var(--text-muted);
+    }
+    
+    .opt.correct .opt-key {
+      color: var(--success);
+    }
+    
+    .opt.wrong .opt-key {
+      color: var(--danger);
+    }
+    
+    /* Results */
+    .results-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-primary);
+      border-radius: var(--radius-xl);
+      padding: var(--space-2xl);
+      text-align: center;
+      margin-bottom: var(--space-xl);
+    }
+    
+    .results-icon {
+      font-size: 64px;
+      margin-bottom: var(--space-lg);
+    }
+    
+    .results-title {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: var(--space-sm);
+    }
+    
+    .results-subtitle {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: var(--space-xl);
+    }
+    
+    .score-display {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-xl);
+      margin-bottom: var(--space-xl);
+      padding: var(--space-lg);
+      background: var(--bg-tertiary);
+      border-radius: var(--radius-lg);
+    }
+    
+    .score-main {
+      text-align: center;
+    }
+    
+    .score-number {
+      font-size: 48px;
+      font-weight: 700;
+      font-family: var(--font-mono);
+      background: linear-gradient(135deg, var(--accent-primary), var(--accent-hover));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .score-label {
+      font-size: 13px;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .score-grade {
+      text-align: center;
+      padding: var(--space-md) var(--space-xl);
+      background: var(--bg-elevated);
+      border-radius: var(--radius-md);
+    }
+    
+    .grade-letter {
+      font-size: 36px;
+      font-weight: 700;
+      margin-bottom: var(--space-xs);
+    }
+    
+    .grade-letter.grade-a { color: var(--success); }
+    .grade-letter.grade-b { color: #a3e635; }
+    .grade-letter.grade-c { color: var(--warning); }
+    .grade-letter.grade-d { color: #fb923c; }
+    .grade-letter.grade-f { color: var(--danger); }
+    
+    .grade-label {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+    
+    /* Breakdown */
+    .breakdown {
+      margin-top: var(--space-xl);
+      text-align: left;
+    }
+    
+    .breakdown-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: var(--space-md);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    
+    .breakdown-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-md);
+      background: var(--bg-tertiary);
+      border-radius: var(--radius-md);
+      margin-bottom: var(--space-sm);
+    }
+    
+    .breakdown-item:last-child {
+      margin-bottom: 0;
+    }
+    
+    .breakdown-tema {
+      font-size: 14px;
+      color: var(--text-primary);
+    }
+    
+    .breakdown-stats {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+    }
+    
+    .breakdown-score {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      font-weight: 500;
+    }
+    
+    .breakdown-bar {
+      width: 80px;
+      height: 6px;
+      background: var(--bg-hover);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    
+    .breakdown-fill {
+      height: 100%;
+      border-radius: 3px;
+      transition: width 0.4s;
+    }
+    
+    /* Results actions */
+    .results-actions {
+      display: flex;
+      gap: var(--space-md);
+      justify-content: center;
+      margin-top: var(--space-xl);
+      flex-wrap: wrap;
+    }
+    
+    /* Modal */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+    }
+    
+    .modal-overlay.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .modal {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-primary);
+      border-radius: var(--radius-xl);
+      padding: var(--space-xl);
+      max-width: 420px;
+      width: 90%;
+      transform: scale(0.95);
+      transition: var(--transition);
+    }
+    
+    .modal-overlay.visible .modal {
+      transform: scale(1);
+    }
+    
+    .modal-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: var(--space-md);
+    }
+    
+    .modal-text {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: var(--space-xl);
+      line-height: 1.6;
+    }
+    
+    .modal-actions {
+      display: flex;
+      gap: var(--space-md);
+      justify-content: flex-end;
+    }
+    
+    /* Review mode */
+    .review-filters {
+      display: flex;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-lg);
+      flex-wrap: wrap;
+    }
+    
+    .filter-btn {
+      padding: var(--space-sm) var(--space-md);
+      font-size: 13px;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-primary);
+      border-radius: 100px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    
+    .filter-btn:hover {
+      background: var(--bg-hover);
+      color: var(--text-primary);
+    }
+    
+    .filter-btn.active {
+      background: var(--accent-primary);
+      border-color: var(--accent-primary);
+      color: white;
+    }
+    
+    /* Question navigation */
+    .q-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-lg);
+      padding: var(--space-md);
+      background: var(--bg-secondary);
+      border-radius: var(--radius-lg);
+    }
+    
+    .q-nav-btn {
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-primary);
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 500;
+      font-family: var(--font-mono);
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    
+    .q-nav-btn:hover {
+      background: var(--bg-hover);
+      border-color: var(--border-secondary);
+    }
+    
+    .q-nav-btn.answered {
+      background: var(--info-bg);
+      border-color: var(--info);
+      color: var(--info);
+    }
+    
+    .q-nav-btn.correct {
+      background: var(--success-bg);
+      border-color: var(--success);
+      color: var(--success);
+    }
+    
+    .q-nav-btn.wrong {
+      background: var(--danger-bg);
+      border-color: var(--danger);
+      color: var(--danger);
+    }
+    
+    /* Loading */
+    .loading {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-2xl);
+    }
+    
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid var(--border-primary);
+      border-top-color: var(--accent-primary);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    /* Utility */
+    .hidden {
+      display: none !important;
+    }
+    
+    .text-center {
+      text-align: center;
+    }
+    
+    .mt-lg {
+      margin-top: var(--space-lg);
+    }
+    
+    .mt-xl {
+      margin-top: var(--space-xl);
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .exam-container {
+        padding: var(--space-md);
+      }
+      
+      .student-bar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      
+      .exam-stats {
+        width: 100%;
+        justify-content: space-between;
+      }
+      
+      .score-display {
+        flex-direction: column;
+        gap: var(--space-lg);
+      }
+      
+      .results-actions {
+        flex-direction: column;
+      }
+      
+      .results-actions .btn {
+        width: 100%;
+      }
+    }
+    
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .fade-in {
+      animation: fadeIn 0.4s ease-out;
+    }
+    
+    .q-card {
+      animation: fadeIn 0.3s ease-out;
+      animation-fill-mode: both;
+    }
+    
+    .q-card:nth-child(1) { animation-delay: 0.05s; }
+    .q-card:nth-child(2) { animation-delay: 0.1s; }
+    .q-card:nth-child(3) { animation-delay: 0.15s; }
+    .q-card:nth-child(4) { animation-delay: 0.2s; }
+    .q-card:nth-child(5) { animation-delay: 0.25s; }
+  </style>
+</head>
+<body>
+  <div class="exam-container">
+    <!-- Header -->
+    <header class="exam-header">
+      <h1>Mantenimiento de Laptops</h1>
+      <p class="subtitle">CTP Las Palmitas · Undécimo Nivel · 30 preguntas</p>
+      <span class="badge">Examen Digital</span>
+    </header>
+    
+    <!-- Formulario de inicio -->
+    <div id="start-form" class="form-card fade-in">
+      <h2 style="font-size: 18px; font-weight: 600; margin-bottom: var(--space-lg);">Datos del Estudiante</h2>
+      
+      <div class="form-group">
+        <label class="form-label" for="student-name">Nombre completo <span class="optional">(requerido)</span></label>
+        <input type="text" id="student-name" class="form-input" placeholder="Ingresa tu nombre completo" autocomplete="name">
+        <p class="form-error" id="name-error">Por favor ingresa tu nombre completo</p>
+      </div>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label" for="student-section">Sección <span class="optional">(requerido)</span></label>
+          <input type="text" id="student-section" class="form-input" placeholder="Ej: 11-A" autocomplete="off">
+          <p class="form-error" id="section-error">Por favor ingresa tu sección</p>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label" for="student-id">Cédula <span class="optional">(opcional)</span></label>
+          <input type="text" id="student-id" class="form-input" placeholder="Ej: 1-2345-6789" maxlength="15" autocomplete="off">
+          <p class="form-error" id="id-error">Formato inválido. Usa: 1-2345-6789</p>
+        </div>
+      </div>
+      
+      <button class="btn btn-primary btn-lg btn-full" id="start-btn" onclick="handleStartExam()">
+        Comenzar Examen
+        <span>→</span>
+      </button>
+    </div>
+    
+    <!-- Barra del estudiante (visible durante el examen) -->
+    <div id="student-bar" class="student-bar hidden">
+      <div class="student-info">
+        <span class="name" id="display-name"></span>
+        <span class="divider"></span>
+        <span class="section" id="display-section"></span>
+      </div>
+      <div class="exam-stats">
+        <div class="stat-item">
+          <span class="icon">📊</span>
+          <span class="value" id="answered-display">0</span>
+          <span>/ 30 respondidas</span>
+        </div>
+        <div class="timer" id="timer">60:00</div>
+      </div>
+    </div>
+    
+    <!-- Barra de progreso -->
+    <div id="progress-container" class="progress-container hidden">
+      <div class="progress-header">
+        <span class="progress-label">Progreso del examen</span>
+        <span class="progress-values" id="progress-values">0%</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+      </div>
+    </div>
+    
+    <!-- Acciones del examen -->
+    <div id="exam-actions" class="exam-actions hidden">
+      <button class="btn btn-secondary" onclick="resetExam()">
+        <span>↺</span> Reiniciar
+      </button>
+      <button class="btn btn-primary" onclick="showSubmitModal()">
+        <span>✓</span> Entregar Examen
+      </button>
+    </div>
+    
+    <!-- Navegación de preguntas -->
+    <div id="q-nav" class="q-nav hidden"></div>
+    
+    <!-- Cuerpo del examen -->
+    <div id="exam-body"></div>
+    
+    <!-- Resultados -->
+    <div id="results" class="hidden">
+      <div class="results-card fade-in">
+        <div class="results-icon" id="results-icon">🎉</div>
+        <h2 class="results-title">Examen Completado</h2>
+        <p class="results-subtitle" id="results-subtitle">Estos son tus resultados</p>
+        
+        <div class="score-display">
+          <div class="score-main">
+            <div class="score-number" id="score-number">0/30</div>
+            <div class="score-label">Puntaje</div>
+          </div>
+          <div class="score-grade">
+            <div class="grade-letter grade-f" id="grade-letter">F</div>
+            <div class="grade-label" id="grade-label">Calificación</div>
+          </div>
+        </div>
+        
+        <div class="breakdown" id="breakdown">
+          <h3 class="breakdown-title">Desglose por Tema</h3>
+          <!-- Se genera dinámicamente -->
+        </div>
+        
+        <div class="results-actions">
+          <button class="btn btn-secondary" onclick="exportResults('clipboard')">
+            <span>📋</span> Copiar Resultados
+          </button>
+          <button class="btn btn-secondary" onclick="exportResults('pdf')">
+            <span>📄</span> Exportar PDF
+          </button>
+          <button class="btn btn-primary" onclick="viewReview()">
+            <span>📝</span> Ver Respuestas
+          </button>
+          <button class="btn btn-success" onclick="newAttempt()">
+            <span>➕</span> Nuevo Intento
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Vista de revisión -->
+    <div id="review-view" class="hidden">
+      <div class="results-card">
+        <h2 class="results-title">Revisión de Respuestas</h2>
+        <p class="results-subtitle">Revisa cada pregunta con su respuesta correcta</p>
+      </div>
+      
+      <div class="review-filters">
+        <button class="filter-btn active" onclick="filterReview('all')">Todas</button>
+        <button class="filter-btn" onclick="filterReview('correct')">Correctas</button>
+        <button class="filter-btn" onclick="filterReview('incorrect')">Incorrectas</button>
+      </div>
+      
+      <div id="review-body"></div>
+      
+      <div class="results-actions mt-xl">
+        <button class="btn btn-secondary" onclick="backToResults()">
+          <span>←</span> Volver a Resultados
+        </button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Modal de confirmación -->
+  <div class="modal-overlay" id="submit-modal">
+    <div class="modal">
+      <h3 class="modal-title">¿Confirmar entrega?</h3>
+      <p class="modal-text" id="submit-message">
+        ¿Estás seguro de entregar el examen? Ya no podrás cambiar tus respuestas.
+      </p>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" onclick="closeSubmitModal()">Cancelar</button>
+        <button class="btn btn-primary" onclick="submitExam()">Entregar</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Modal de confirmación de reinicio -->
+  <div class="modal-overlay" id="reset-modal">
+    <div class="modal">
+      <h3 class="modal-title">¿Reiniciar examen?</h3>
+      <p class="modal-text">
+        ¿Estás seguro de reiniciar el examen? Perderás todas tus respuestas y deberás comenzar de nuevo.
+      </p>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" onclick="closeResetModal()">Cancelar</button>
+        <button class="btn btn-danger" onclick="confirmReset()">Reiniciar</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ==================== CONFIGURACIÓN ====================
+    const EXAM_CONFIG = {
+      totalQuestions: 30,
+      timeLimit: 60 * 60, // 60 minutos en segundos
+      timeWarnings: [15 * 60, 5 * 60, 1 * 60], // Advertencias a 15, 5 y 1 minuto
+      passPercentage: 60,
+      autoSaveInterval: 30000, // 30 segundos
+      maxAttempts: 5,
+      storageKey: 'exam_data',
+      storageExpiry: 7 * 24 * 60 * 60 * 1000 // 7 días
+    };
+
+    // ==================== CARGAR PREGUNTAS DESDE JSON ====================
+    let questionsOriginal = [];
+    let questionsLoaded = false;
+    
+    // Función para cargar preguntas desde archivo JSON
+    async function loadQuestions() {
+      try {
+        const response = await fetch('preguntas.json');
+        if (!response.ok) throw new Error('No se pudo cargar');
+        questionsOriginal = await response.json();
+        console.log(`✅ Cargadas ${questionsOriginal.length} preguntas desde preguntas.json`);
+        console.log(`   Tema: ${questionsOriginal[0].tema}`);
+        questionsLoaded = true;
+      } catch (error) {
+        console.error('❌ Error al cargar preguntas.json:', error);
+        alert('Error al cargar preguntas.json. Verifica que el archivo esté en la misma carpeta.');
+      }
+    }
+
+    // ==================== ESTADO DEL EXAMEN ====================
+    let questions = [];
+    let answers = [];
+    let correctTotal = 0;
+    let examState = 'initial'; // initial, in_progress, submitted, review
+    let studentData = null;
+    let timerInterval = null;
+    let timeRemaining = EXAM_CONFIG.timeLimit;
+    let startTime = null;
+
+    // ==================== UTILIDADES ====================
+    
+    // Validar formato de cédula costarricense
+    function validateCedula(cedula) {
+      if (!cedula) return true; // Es opcional
+      // Formato: 1-2345-6789 o 123456789
+      const regex = /^(\d{1}-\d{4}-\d{4}|\d{9})$/;
+      return regex.test(cedula);
+    }
+    
+    // Formatear cédula
+    function formatCedula(value) {
+      const digits = value.replace(/\D/g, '');
+      if (digits.length <= 1) return digits;
+      if (digits.length <= 5) return `${digits.slice(0,1)}-${digits.slice(1)}`;
+      return `${digits.slice(0,1)}-${digits.slice(1,5)}-${digits.slice(5,9)}`;
+    }
+    
+    // Barajar array (Fisher-Yates)
+    function shuffleArray(array) {
+      const shuffled = [...array];
+      for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+      return shuffled;
+    }
+    
+    // Obtener datos del localStorage
+    function getStorageData() {
+      try {
+        const data = localStorage.getItem(EXAM_CONFIG.storageKey);
+        if (!data) return null;
+        
+        const parsed = JSON.parse(data);
+        
+        // Verificar si ha expirado
+        if (Date.now() - parsed.timestamp > EXAM_CONFIG.storageExpiry) {
+          localStorage.removeItem(EXAM_CONFIG.storageKey);
+          return null;
+        }
+        
+        return parsed;
+      } catch (e) {
+        return null;
+      }
+    }
+    
+    // Guardar en localStorage
+    function saveToStorage() {
+      if (examState !== 'in_progress') return;
+      
+      const data = {
+        studentData,
+        answers,
+        correctTotal,
+        examState,
+        timeRemaining,
+        startTime,
+        timestamp: Date.now()
+      };
+      
+      localStorage.setItem(EXAM_CONFIG.storageKey, JSON.stringify(data));
+    }
+    
+    // Limpiar storage
+    function clearStorage() {
+      localStorage.removeItem(EXAM_CONFIG.storageKey);
+    }
+
+    // ==================== GESTIÓN DEL EXAMEN ====================
+    
+    // Función wrapper para iniciar examen (maneja estado de carga)
+    async function handleStartExam() {
+      const btn = document.getElementById('start-btn');
+      btn.disabled = true;
+      btn.innerHTML = '<span class="loading">Cargando preguntas...</span>';
+      
+      try {
+        await startExam();
+      } catch (error) {
+        console.error('Error al iniciar examen:', error);
+        alert('Error al cargar las preguntas. Por favor intenta de nuevo.');
+        btn.disabled = false;
+        btn.innerHTML = 'Comenzar Examen <span>→</span>';
+      }
+    }
+    
+    // Iniciar examen
+    async function startExam() {
+      const nameInput = document.getElementById('student-name');
+      const sectionInput = document.getElementById('student-section');
+      const idInput = document.getElementById('student-id');
+      
+      let valid = true;
+      
+      // Validar nombre
+      if (!nameInput.value.trim()) {
+        nameInput.classList.add('error');
+        document.getElementById('name-error').classList.add('visible');
+        valid = false;
+      } else {
+        nameInput.classList.remove('error');
+        document.getElementById('name-error').classList.remove('visible');
+      }
+      
+      // Validar sección
+      if (!sectionInput.value.trim()) {
+        sectionInput.classList.add('error');
+        document.getElementById('section-error').classList.add('visible');
+        valid = false;
+      } else {
+        sectionInput.classList.remove('error');
+        document.getElementById('section-error').classList.remove('visible');
+      }
+      
+      // Validar cédula (si se proporcionó)
+      if (idInput.value && !validateCedula(idInput.value)) {
+        idInput.classList.add('error');
+        document.getElementById('id-error').classList.add('visible');
+        valid = false;
+      } else {
+        idInput.classList.remove('error');
+        document.getElementById('id-error').classList.remove('visible');
+      }
+      
+      if (!valid) return;
+      
+      // Si las preguntas no se han cargado, cargarlas primero
+      if (!questionsLoaded) {
+        await loadQuestions();
+      }
+      
+      // Verificar que las preguntas se cargaron correctamente
+      if (questionsOriginal.length === 0) {
+        alert('No se pudieron cargar las preguntas. Por favor verifica que preguntas.json esté en la misma carpeta que el HTML.');
+        return;
+      }
+      
+      // Guardar datos del estudiante
+      studentData = {
+        name: nameInput.value.trim(),
+        section: sectionInput.value.trim(),
+        id: idInput.value.trim() || null
+      };
+      
+      // Verificar si hay datos guardados
+      const savedData = getStorageData();
+      
+      if (savedData && savedData.examState === 'in_progress') {
+        // Recuperar examen guardado
+        answers = savedData.answers;
+        correctTotal = savedData.correctTotal;
+        timeRemaining = savedData.timeRemaining;
+        startTime = savedData.startTime;
+      } else {
+        // Iniciar nuevo examen - barajar preguntas
+        questions = shuffleArray([...questionsOriginal]); // Copia para no modificar original
+        answers = new Array(questions.length).fill(null);
+        correctTotal = 0;
+        timeRemaining = EXAM_CONFIG.timeLimit;
+        startTime = Date.now();
+      }
+      
+      // Actualizar UI
+      document.getElementById('display-name').textContent = studentData.name;
+      document.getElementById('display-section').textContent = studentData.section;
+      
+      // Cambiar estado
+      examState = 'in_progress';
+      
+      // Ocultar formulario, mostrar examen
+      document.getElementById('start-form').classList.add('hidden');
+      document.getElementById('student-bar').classList.remove('hidden');
+      document.getElementById('progress-container').classList.remove('hidden');
+      document.getElementById('exam-actions').classList.remove('hidden');
+      document.getElementById('q-nav').classList.remove('hidden');
+      
+      // Renderizar examen
+      renderExam();
+      renderQuestionNav();
+      updateProgress();
+      
+      // Iniciar temporizador
+      startTimer();
+      
+      // Auto-guardado
+      setInterval(saveToStorage, EXAM_CONFIG.autoSaveInterval);
+    }
+    
+    // Reiniciar examen
+    function resetExam() {
+      document.getElementById('reset-modal').classList.add('visible');
+    }
+    
+    function closeResetModal() {
+      document.getElementById('reset-modal').classList.remove('visible');
+    }
+    
+    function confirmReset() {
+      closeResetModal();
+      clearStorage();
+      location.reload();
+    }
+    
+    // Renderizar examen
+    function renderExam() {
+      const body = document.getElementById('exam-body');
+      body.innerHTML = '';
+      
+      const temas = {};
+      questions.forEach((q, i) => {
+        if (!temas[q.tema]) temas[q.tema] = [];
+        temas[q.tema].push({ ...q, idx: i });
+      });
+      
+      Object.entries(temas).forEach(([tema, qs]) => {
+        const sec = document.createElement('div');
+        sec.className = 'tema-section';
+        
+        const temaName = tema.replace('Tema ', 'Tema ');
+        const temaNumber = tema.match(/\d+/)?.[0] || '';
+        
+        sec.innerHTML = `
+          <div class="tema-label">
+            <span>${temaName}</span>
+            <span class="count">${qs.length} preguntas</span>
+          </div>
+        `;
+        
+        qs.forEach(q => {
+          const card = createQuestionCard(q);
+          sec.appendChild(card);
+        });
+        
+        body.appendChild(sec);
+      });
+    }
+    
+    // Crear tarjeta de pregunta
+    function createQuestionCard(q) {
+      const card = document.createElement('div');
+      card.className = 'q-card';
+      card.id = 'q' + q.idx;
+      
+      if (answers[q.idx] !== null) {
+        card.classList.add('answered');
+        if (answers[q.idx] === q.ans) {
+          card.classList.add('correct-answer');
+        } else {
+          card.classList.add('wrong-answer');
+        }
+      }
+      
+      const keys = ['a', 'b', 'c'];
+      let statusHtml = '';
+      
+      if (examState === 'submitted' || examState === 'review') {
+        if (answers[q.idx] === q.ans) {
+          statusHtml = '<span class="q-status correct">✓ Correcta</span>';
+        } else if (answers[q.idx] !== null) {
+          statusHtml = '<span class="q-status incorrect">✗ Incorrecta</span>';
+        }
+      }
+      
+      let optsHtml = q.opts.map((o, j) => {
+        let cls = 'opt';
+        if (answers[q.idx] !== null) {
+          if (j === q.ans) cls += ' correct';
+          else if (j === answers[q.idx]) cls += ' wrong';
+        }
+        if (examState === 'submitted' || examState === 'review') {
+          cls += ' disabled';
+        }
+        if (answers[q.idx] === j) cls += ' selected';
+        
+        return `<div class="${cls}" onclick="answer(${q.idx}, ${j})">
+          <span class="opt-key">${keys[j]})</span>
+          <span>${o}</span>
+        </div>`;
+      }).join('');
+      
+      card.innerHTML = `
+        <div class="q-header">
+          <div class="q-number">${q.idx + 1}</div>
+          <div class="q-text">${q.q}</div>
+          ${statusHtml}
+        </div>
+        <div class="options">${optsHtml}</div>
+      `;
+      
+      return card;
+    }
+    
+    // Renderizar navegación de preguntas
+    function renderQuestionNav() {
+      const nav = document.getElementById('q-nav');
+      nav.innerHTML = '';
+      
+      questions.forEach((q, i) => {
+        const btn = document.createElement('button');
+        btn.className = 'q-nav-btn';
+        btn.textContent = i + 1;
+        
+        if (answers[i] !== null) {
+          if (examState === 'submitted' || examState === 'review') {
+            if (answers[i] === q.ans) {
+              btn.classList.add('correct');
+            } else {
+              btn.classList.add('wrong');
+            }
+          } else {
+            btn.classList.add('answered');
+          }
+        }
+        
+        btn.onclick = () => {
+          document.getElementById('q' + i).scrollIntoView({ behavior: 'smooth', block: 'center' });
+        };
+        
+        nav.appendChild(btn);
+      });
+    }
+    
+    // Responder pregunta
+    function answer(qIdx, optIdx) {
+      if (answers[qIdx] !== null) return; // Ya respondida
+      if (examState === 'submitted' || examState === 'review') return;
+      
+      answers[qIdx] = optIdx;
+      if (optIdx === questions[qIdx].ans) {
+        correctTotal++;
+      }
+      
+      // Actualizar UI
+      const card = document.getElementById('q' + qIdx);
+      card.classList.add('answered');
+      
+      if (optIdx === questions[qIdx].ans) {
+        card.classList.add('correct-answer');
+      } else {
+        card.classList.add('wrong-answer');
+      }
+      
+      const opts = card.querySelectorAll('.opt');
+      opts.forEach((el, j) => {
+        el.classList.add('disabled');
+        if (j === questions[qIdx].ans) {
+          el.classList.add('correct');
+        } else if (j === optIdx) {
+          el.classList.add('wrong');
+        }
+        if (j === optIdx) {
+          el.classList.add('selected');
+        }
+      });
+      
+      // Agregar status
+      const header = card.querySelector('.q-header');
+      const status = document.createElement('span');
+      status.className = 'q-status ' + (optIdx === questions[qIdx].ans ? 'correct' : 'incorrect');
+      status.textContent = optIdx === questions[qIdx].ans ? '✓ Correcta' : '✗ Incorrecta';
+      header.appendChild(status);
+      
+      updateProgress();
+      renderQuestionNav();
+      saveToStorage();
+    }
+    
+    // Actualizar progreso
+    function updateProgress() {
+      const answered = answers.filter(a => a !== null).length;
+      const percentage = (answered / questions.length) * 100;
+      
+      document.getElementById('answered-display').textContent = answered;
+      document.getElementById('progress-values').textContent = `${Math.round(percentage)}%`;
+      document.getElementById('progress-fill').style.width = percentage + '%';
+    }
+    
+    // ==================== TEMPORIZADOR ====================
+    
+    function startTimer() {
+      updateTimerDisplay();
+      
+      timerInterval = setInterval(() => {
+        timeRemaining--;
+        updateTimerDisplay();
+        
+        // Verificar advertencias
+        if (EXAM_CONFIG.timeWarnings.includes(timeRemaining)) {
+          showTimeWarning();
+        }
+        
+        // Auto-entregar al terminar tiempo
+        if (timeRemaining <= 0) {
+          autoSubmit();
+        }
+      }, 1000);
+    }
+    
+    function updateTimerDisplay() {
+      const minutes = Math.floor(timeRemaining / 60);
+      const seconds = timeRemaining % 60;
+      const display = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      
+      const timerEl = document.getElementById('timer');
+      timerEl.textContent = display;
+      
+      // Cambiar color según tiempo restante
+      timerEl.classList.remove('warning', 'danger');
+      if (timeRemaining <= EXAM_CONFIG.timeWarnings[2]) {
+        timerEl.classList.add('danger');
+      } else if (timeRemaining <= EXAM_CONFIG.timeWarnings[1]) {
+        timerEl.classList.add('warning');
+      }
+    }
+    
+    function showTimeWarning() {
+      const minutes = Math.floor(timeRemaining / 60);
+      let message;
+      
+      if (minutes >= 1) {
+        message = `¡Atención! Quedan ${minutes} minuto${minutes > 1 ? 's' : ''} de examen.`;
+      } else {
+        message = '¡Atención! Queda menos de 1 minuto.';
+      }
+      
+      alert(message);
+    }
+    
+    function stopTimer() {
+      if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+      }
+    }
+    
+    function autoSubmit() {
+      stopTimer();
+      submitExam();
+    }
+
+    // ==================== ENVÍO Y RESULTADOS ====================
+    
+    function showSubmitModal() {
+      const answered = answers.filter(a => a !== null).length;
+      const unanswered = questions.length - answered;
+      
+      const message = unanswered > 0
+        ? `¿Estás seguro de entregar el examen? Has respondido ${answered} de ${questions.length} preguntas. Quedan ${unanswered} sin responder. Ya no podrás cambiar tus respuestas.`
+        : '¿Estás seguro de entregar el examen? Ya no podrás cambiar tus respuestas.';
+      
+      document.getElementById('submit-message').textContent = message;
+      document.getElementById('submit-modal').classList.add('visible');
+    }
+    
+    function closeSubmitModal() {
+      document.getElementById('submit-modal').classList.remove('visible');
+    }
+    
+    function submitExam() {
+      closeSubmitModal();
+      stopTimer();
+      examState = 'submitted';
+      
+      // Bloquear UI
+      document.getElementById('exam-actions').classList.add('hidden');
+      
+      // Calcular resultados
+      calculateResults();
+      
+      // Limpiar storage
+      clearStorage();
+    }
+    
+    function calculateResults() {
+      const answered = answers.filter(a => a !== null).length;
+      const percentage = (correctTotal / questions.length) * 100;
+      
+      // Calcular calificación
+      let grade, gradeLabel;
+      if (percentage >= 90) { grade = 'A'; gradeLabel = 'Excelente'; }
+      else if (percentage >= 80) { grade = 'B'; gradeLabel = 'Muy Bueno'; }
+      else if (percentage >= 70) { grade = 'C'; gradeLabel = 'Bueno'; }
+      else if (percentage >= 60) { grade = 'D'; gradeLabel = 'Suficiente'; }
+      else { grade = 'F'; gradeLabel = 'Insuficiente'; }
+      
+      // Actualizar UI de resultados
+      const icon = percentage >= 60 ? '🎉' : '📚';
+      document.getElementById('results-icon').textContent = icon;
+      document.getElementById('results-number').textContent = `${correctTotal}/${questions.length}`;
+      document.getElementById('score-number').textContent = `${correctTotal}/${questions.length}`;
+      
+      const gradeEl = document.getElementById('grade-letter');
+      gradeEl.textContent = grade;
+      gradeEl.className = 'grade-letter grade-' + grade.toLowerCase();
+      
+      document.getElementById('grade-label').textContent = gradeLabel;
+      
+      // Desglose por tema
+      renderBreakdown();
+      
+      // Ocultar examen, mostrar resultados
+      document.getElementById('exam-body').classList.add('hidden');
+      document.getElementById('q-nav').classList.add('hidden');
+      document.getElementById('progress-container').classList.add('hidden');
+      document.getElementById('student-bar').classList.add('hidden');
+      document.getElementById('results').classList.remove('hidden');
+      
+      // Guardar intento en historial
+      saveAttemptHistory();
+    }
+    
+    function renderBreakdown() {
+      const breakdownEl = document.getElementById('breakdown');
+      
+      // Agrupar por tema
+      const temaStats = {};
+      questions.forEach((q, i) => {
+        if (!temaStats[q.tema]) {
+          temaStats[q.tema] = { total: 0, correct: 0 };
+        }
+        temaStats[q.tema].total++;
+        if (answers[i] === q.ans) {
+          temaStats[q.tema].correct++;
+        }
+      });
+      
+      let html = '';
+      Object.entries(temaStats).forEach(([tema, stats]) => {
+        const pct = (stats.correct / stats.total) * 100;
+        let color = 'var(--danger)';
+        if (pct >= 70) color = 'var(--success)';
+        else if (pct >= 50) color = 'var(--warning)';
+        
+        html += `
+          <div class="breakdown-item">
+            <span class="breakdown-tema">${tema.replace('Tema ', 'Tema ')}</span>
+            <div class="breakdown-stats">
+              <span class="breakdown-score" style="color: ${color}">${stats.correct}/${stats.total}</span>
+              <div class="breakdown-bar">
+                <div class="breakdown-fill" style="width: ${pct}%; background: ${color}"></div>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+      
+      breakdownEl.innerHTML = `
+        <h3 class="breakdown-title">Desglose por Tema</h3>
+        ${html}
+      `;
+    }
+    
+    function saveAttemptHistory() {
+      const history = JSON.parse(localStorage.getItem('exam_history') || '[]');
+      
+      const attempt = {
+        date: new Date().toISOString(),
+        student: studentData.name,
+        section: studentData.section,
+        score: correctTotal,
+        total: questions.length,
+        percentage: (correctTotal / questions.length) * 100
+      };
+      
+      history.unshift(attempt);
+      
+      // Mantener solo los últimos 5 intentos
+      if (history.length > EXAM_CONFIG.maxAttempts) {
+        history.pop();
+      }
+      
+      localStorage.setItem('exam_history', JSON.stringify(history));
+    }
+
+    // ==================== REVISIÓN ====================
+    
+    function viewReview() {
+      examState = 'review';
+      document.getElementById('results').classList.add('hidden');
+      document.getElementById('review-view').classList.remove('hidden');
+      renderReview();
+    }
+    
+    function renderReview(filter = 'all') {
+      const body = document.getElementById('review-body');
+      body.innerHTML = '';
+      
+      questions.forEach((q, i) => {
+        const isCorrect = answers[i] === q.ans;
+        
+        if (filter === 'correct' && !isCorrect) return;
+        if (filter === 'incorrect' && isCorrect) return;
+        
+        const card = createQuestionCard(q);
+        body.appendChild(card);
+      });
+    }
+    
+    function filterReview(filter) {
+      // Actualizar botones
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      event.target.classList.add('active');
+      
+      renderReview(filter);
+    }
+    
+    function backToResults() {
+      examState = 'submitted';
+      document.getElementById('review-view').classList.add('hidden');
+      document.getElementById('results').classList.remove('hidden');
+    }
+
+    // ==================== EXPORTACIÓN ====================
+    
+    function exportResults(format) {
+      const answered = answers.filter(a => a !== null).length;
+      const percentage = (correctTotal / questions.length) * 100;
+      
+      let grade, gradeLabel;
+      if (percentage >= 90) { grade = 'A'; gradeLabel = 'Excelente'; }
+      else if (percentage >= 80) { grade = 'B'; gradeLabel = 'Muy Bueno'; }
+      else if (percentage >= 70) { grade = 'C'; gradeLabel = 'Bueno'; }
+      else if (percentage >= 60) { grade = 'D'; gradeLabel = 'Suficiente'; }
+      else { grade = 'F'; gradeLabel = 'Insuficiente'; }
+      
+      if (format === 'clipboard') {
+        const text = `
+═══════════════════════════════════════
+EXAMEN DE CALIDAD DE SOFTWARE
+═══════════════════════════════════════
+Estudiante: ${studentData.name}
+Sección: ${studentData.section}
+${studentData.id ? `Cédula: ${studentData.id}` : ''}
+Fecha: ${new Date().toLocaleDateString('es-CR')}
+
+PUNTUACIÓN: ${correctTotal}/${questions.length} (${Math.round(percentage)}%)
+Calificación: ${grade} (${gradeLabel})
+
+RESPUESTAS:
+${questions.map((q, i) => {
+  const userAnswer = answers[i] !== null ? q.opts[answers[i]] : 'Sin responder';
+  const correctAnswer = q.opts[q.ans];
+  const isCorrect = answers[i] === q.ans;
+  return `${i + 1}. ${isCorrect ? '✓' : '✗'} ${userAnswer}${!isCorrect ? ` (Correcta: ${correctAnswer})` : ''}`;
+}).join('\n')}
+═══════════════════════════════════════
+        `.trim();
+        
+        navigator.clipboard.writeText(text).then(() => {
+          alert('Resultados copiados al portapapeles');
+        });
+      }
+      
+      if (format === 'pdf') {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        
+        // Título
+        doc.setFontSize(20);
+        doc.setTextColor(217, 119, 87);
+        doc.text('Examen de Calidad de Software', 105, 20, { align: 'center' });
+        
+        // Datos del estudiante
+        doc.setFontSize(12);
+        doc.setTextColor(60, 60, 60);
+        doc.text(`Estudiante: ${studentData.name}`, 20, 35);
+        doc.text(`Sección: ${studentData.section}`, 20, 42);
+        if (studentData.id) {
+          doc.text(`Cédula: ${studentData.id}`, 20, 49);
+        }
+        doc.text(`Fecha: ${new Date().toLocaleDateString('es-CR')}`, 20, studentData.id ? 56 : 49);
+        
+        // Resultados
+        doc.setFontSize(16);
+        doc.setTextColor(30, 30, 30);
+        doc.text(`Puntuación: ${correctTotal}/${questions.length}`, 20, 70);
+        doc.text(`Porcentaje: ${Math.round(percentage)}%`, 20, 78);
+        doc.text(`Calificación: ${grade} (${gradeLabel})`, 20, 86);
+        
+        // Respuestas
+        doc.setFontSize(14);
+        doc.setTextColor(217, 119, 87);
+        doc.text('Respuestas:', 20, 100);
+        
+        doc.setFontSize(9);
+        doc.setTextColor(60, 60, 60);
+        
+        let y = 110;
+        questions.forEach((q, i) => {
+          if (y > 270) {
+            doc.addPage();
+            y = 20;
+          }
+          
+          const isCorrect = answers[i] === q.ans;
+          const userAnswer = answers[i] !== null ? q.opts[answers[i]] : 'Sin responder';
+          
+          doc.setTextColor(isCorrect ? 34 : 220, isCorrect ? 160 : 113, isCorrect ? 80 : 113);
+          doc.text(`${i + 1}. ${isCorrect ? '✓' : '✗'} ${userAnswer}`, 20, y);
+          
+          if (!isCorrect && answers[i] !== null) {
+            doc.setTextColor(100, 100, 100);
+            doc.text(`   → Correcta: ${q.opts[q.ans]}`, 20, y + 5);
+            y += 10;
+          }
+          
+          y += 7;
+        });
+        
+        doc.save(`examen_calidad_${studentData.name.replace(/\s+/g, '_')}_${new Date().toISOString().split('T')[0]}.pdf`);
+      }
+    }
+    
+    // ==================== NUEVO INTENTO ====================
+    
+    function newAttempt() {
+      if (confirm('¿Comenzar un nuevo intento? Esto reiniciará todas las respuestas.')) {
+        clearStorage();
+        location.reload();
+      }
+    }
+    
+    // ==================== EVENT LISTENERS ====================
+    
+    // Formatear cédula mientras se escribe
+    document.getElementById('student-id').addEventListener('input', function(e) {
+      e.target.value = formatCedula(e.target.value);
+    });
+    
+    // Prevenir salida accidental
+    window.onbeforeunload = function() {
+      if (examState === 'in_progress') {
+        return '¿Estás seguro de salir? Tu progreso se guardará automáticamente.';
+      }
+    };
+    
+    // Verificar si hay examen guardado al cargar
+    document.addEventListener('DOMContentLoaded', function() {
+      const savedData = getStorageData();
+      if (savedData && savedData.examState === 'in_progress') {
+        // Mostrar opción de continuar
+        if (confirm('¿Continuar con el examen anterior?')) {
+          // El usuario continuará automáticamente porque startExam maneja esto
+        } else {
+          clearStorage();
+        }
+      }
+    });
+  </script>
+</body>
+</html>

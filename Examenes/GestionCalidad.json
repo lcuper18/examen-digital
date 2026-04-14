@@ -1,0 +1,474 @@
+{
+  "metadata": {
+    "id": "gestion-calidad",
+    "titulo": "Gestión de Calidad",
+    "descripcion": "Examen sobre metodologías de calidad, mejora continua y estándares internacionales",
+    "institucion": "CTP Las Palmitas",
+    "nivel": "Undécimo Nivel",
+    "duracion_minutos": 45,
+    "preguntas_totales": 30,
+    "porcentaje_aprobacion": 60,
+    "categoria": "Gestión",
+    "dificultad": "Avanzada",
+    "tags": ["calidad", "mejora continua", "scrum", "lean", "iso", "dmaic", "agile"],
+    "version": "1.0",
+    "fecha_creacion": "2025-01-15"
+  },
+  "preguntas": [
+    {
+      "id": "q1",
+      "tema": "Tema 1 — Metodologías de Mejora Continua",
+      "texto": "¿En qué empresa y año fue desarrollada la metodología Seis Sigma originalmente?",
+      "opciones": [
+        {"id": "a", "texto": "IBM en 1990"},
+        {"id": "b", "texto": "Motorola en 1986"},
+        {"id": "c", "texto": "Toyota en 1950"}
+      ],
+      "respuesta_correcta": "b",
+      "dificultad": "facil",
+      "explicacion": "Seis Sigma fue desarrollada originalmente en Motorola en 1986 por Bill Smith, con el objetivo de reducir la variabilidad en los procesos de manufactura."
+    },
+    {
+      "id": "q2",
+      "tema": "Tema 1 — Metodologías de Mejora Continua",
+      "texto": "Un proceso Seis Sigma tiene como máximo ¿cuántos defectos por millón de oportunidades (DPMO)?",
+      "opciones": [
+        {"id": "a", "texto": "6 DPMO"},
+        {"id": "b", "texto": "34 DPMO"},
+        {"id": "c", "texto": "3.4 DPMO"}
+      ],
+      "respuesta_correcta": "c",
+      "dificultad": "media",
+      "explicacion": "Un proceso Six Sigma tiene un máximo de 3.4 defectos por millón de oportunidades, lo que representa una tasa de calidad del 99.99966%."
+    },
+    {
+      "id": "q3",
+      "tema": "Tema 1 — Metodologías de Mejora Continua",
+      "texto": "¿Cuál nivel Belt de Seis Sigma lidera proyectos complejos, es experto en estadística y mentoriza a Green Belts?",
+      "opciones": [
+        {"id": "a", "texto": "White Belt"},
+        {"id": "b", "texto": "Black Belt"},
+        {"id": "c", "texto": "Yellow Belt"}
+      ],
+      "respuesta_correcta": "b",
+      "dificultad": "media",
+      "explicacion": "El Black Belt es el experto en estadísticas y metodologías Six Sigma, lidera proyectos complejos de tiempo completo y mentoriza a los Green Belts."
+    },
+    {
+      "id": "q4",
+      "tema": "Tema 1 — Metodologías de Mejora Continua",
+      "texto": "En DMAIC, ¿qué fase tiene como objetivo identificar las causas raíz de los defectos usando herramientas como el diagrama de Ishikawa?",
+      "opciones": [
+        {"id": "a", "texto": "Definir"},
+        {"id": "b", "texto": "Medir"},
+        {"id": "c", "texto": "Analizar"}
+      ],
+      "respuesta_correcta": "c",
+      "dificultad": "media",
+      "explicacion": "La fase 'Analizar' del ciclo DMAIC se enfoca en identificar las causas raíz de los problemas utilizando herramientas como diagramas de Ishikawa, Pareto y análisis de regresión."
+    },
+    {
+      "id": "q5",
+      "tema": "Tema 1 — Metodologías de Mejora Continua",
+      "texto": "¿Cuál de las siguientes opciones corresponde a una 'Muda' (desperdicio) dentro de la metodología Lean en software?",
+      "opciones": [
+        {"id": "a", "texto": "Realizar Daily Scrum diariamente"},
+        {"id": "b", "texto": "Desarrollar funcionalidades que el cliente no necesita"},
+        {"id": "c", "texto": "Documentar el código fuente"}
+      ],
+      "respuesta_correcta": "b",
+      "dificultad": "media",
+      "explicacion": "En Lean, las funcionalidades que el cliente no necesita representan 'over-production' o producción excesiva, una de las 7 mudas (desperdicios) principales."
+    },
+    {
+      "id": "q6",
+      "tema": "Tema 1 — Metodologías de Mejora Continua",
+      "texto": "La técnica Lean llamada Heijunka se refiere a:",
+      "opciones": [
+        {"id": "a", "texto": "Producir solo lo que se necesita cuando se necesita"},
+        {"id": "b", "texto": "Nivelar la carga de trabajo distribuyendo tareas uniformemente en el tiempo"},
+        {"id": "c", "texto": "Eliminar todos los defectos antes de la entrega"}
+      ],
+      "respuesta_correcta": "b",
+      "dificultad": "avanzada",
+      "explicacion": "Heijunka (nivelación) es una técnica Lean que busca nivelar la carga de trabajo, distribuyendo las tareas de manera uniforme para evitar sobrecargas y cuellos de botella."
+    },
+    {
+      "id": "q7",
+      "tema": "Tema 1 — Metodologías de Mejora Continua",
+      "texto": "En Scrum, ¿cuál es la responsabilidad principal del Product Owner?",
+      "opciones": [
+        {"id": "a", "texto": "Facilitar los eventos de Scrum y eliminar impedimentos del equipo"},
+        {"id": "b", "texto": "Gestionar y priorizar el Product Backlog representando al cliente"},
+        {"id": "c", "texto": "Escribir el código y realizar pruebas unitarias"}
+      ],
+      "respuesta_correcta": "b",
+      "dificultad": "facil",
+      "explicacion": "El Product Owner es responsable de gestionar el Product Backlog, priorizando las funcionalidades según el valor de negocio y representando los intereses del cliente."
+    },
+    {
+      "id": "q8",
+      "tema": "Tema 1 — Metodologías de Mejora Continua",
+      "texto": "¿Cuánto dura máximo una reunión Daily Scrum según el marco de trabajo Scrum?",
+      "opciones": [
+        {"id": "a", "texto": "15 minutos"},
+        {"id": "b", "texto": "1 hora"},
+        {"id": "c", "texto": "30 minutos"}
+      ],
+      "respuesta_correcta": "a",
+      "dificultad": "facil",
+      "explicacion": "El Daily Scrum es una reunión daily de máximo 15 minutos donde el equipo de desarrollo sincroniza el trabajo y planifica las próximas 24 horas."
+    },
+    {
+      "id": "q9",
+      "tema": "Tema 1 — Metodologías de Mejora Continua",
+      "texto": "¿Cuál es una diferencia clave entre Scrum y Kanban?",
+      "opciones": [
+        {"id": "a", "texto": "Scrum usa tableros visuales y Kanban no usa ningún tablero"},
+        {"id": "b", "texto": "Scrum trabaja con Sprints de tiempo fijo; Kanban opera con flujo continuo sin iteraciones fijas"},
+        {"id": "c", "texto": "Kanban define roles obligatorios mientras que Scrum no tiene roles"}
+      ],
+      "respuesta_correcta": "b",
+      "dificultad": "media",
+      "explicacion": "La diferencia principal es que Scrum trabaja en iteraciones fijas (Sprints), mientras Kanban es un flujo continuo sin ciclos definidos, permitiendo entrega inmediata."
+    },
+    {
+      "id": "q10",
+      "tema": "Tema 1 — Metodologías de Mejora Continua",
+      "texto": "El artefacto de Scrum que contiene TODO el trabajo pendiente del producto, ordenado por prioridad y gestionado por el Product Owner, es:",
+      "opciones": [
+        {"id": "a", "texto": "Sprint Backlog"},
+        {"id": "b", "texto": "Incremento"},
+        {"id": "c", "texto": "Product Backlog"}
+      ],
+      "respuesta_correcta": "c",
+      "dificultad": "facil",
+      "explicacion": "El Product Backlog es la única fuente de trabajo del producto, ordenada por prioridad por el Product Owner, conteniendo todas las funcionalidades, mejoras y corrección de errores."
+    },
+    {
+      "id": "q11",
+      "tema": "Tema 2 — Mejora de Procesos, DMAIC, BDD y Poka-Yoke",
+      "texto": "En un diagrama de flujo estándar, ¿qué símbolo representa una decisión con salidas Sí/No?",
+      "opciones": [
+        {"id": "a", "texto": "Rectángulo"},
+        {"id": "b", "texto": "Rombo (diamante)"},
+        {"id": "c", "texto": "Paralelogramo"}
+      ],
+      "respuesta_correcta": "b",
+      "dificultad": "facil",
+      "explicacion": "El rombo (diamante) en diagramas de flujo representa una decisión condicional, típicamente con dos salidas: sí/no o verdadero/falso."
+    },
+    {
+      "id": "q12",
+      "tema": "Tema 2 — Mejora de Procesos, DMAIC, BDD y Poka-Yoke",
+      "texto": "En la fase Definir del ciclo DMAIC, ¿qué herramienta identifica Suppliers, Inputs, Process, Outputs y Customers?",
+      "opciones": [
+        {"id": "a", "texto": "Diagrama de Pareto"},
+        {"id": "b", "texto": "Diagrama SIPOC"},
+        {"id": "c", "texto": "Diagrama de Ishikawa"}
+      ],
+      "respuesta_correcta": "b",
+      "dificultad": "media",
+      "explicacion": "SIPOC (Suppliers, Inputs, Process, Outputs, Customers) es una herramienta usada en la fase Definir para mapear el alcance del proceso y sus componentes."
+    },
+    {
+      "id": "q13",
+      "tema": "Tema 2 — Mejora de Procesos, DMAIC, BDD y Poka-Yoke",
+      "texto": "El Diagrama de Pareto aplicado al análisis de defectos en software se basa en el principio de que:",
+      "opciones": [
+        {"id": "a", "texto": "El 100% de las causas produce el 100% de los defectos"},
+        {"id": "b", "texto": "El 80% de los defectos proviene del 20% de las causas"},
+        {"id": "c", "texto": "El 50% de los defectos proviene del 50% de las causas"}
+      ],
+      "respuesta_correcta": "b",
+      "dificultad": "media",
+      "explicacion": "El principio de Pareto (80/20) establece que aproximadamente el 80% de los defectos provienen del 20% de las causas, permitiendo enfocar esfuerzos en las más impactantes."
+    },
+    {
+      "id": "q14",
+      "tema": "Tema 2 — Mejora de Procesos, DMAIC, BDD y Poka-Yoke",
+      "texto": "BDD (Behavior-Driven Development) utiliza el lenguaje Gherkin con el formato:",
+      "opciones": [
+        {"id": "a", "texto": "If-Then-Else"},
+        {"id": "b", "texto": "Given-When-Then"},
+        {"id": "c", "texto": "Input-Process-Output"}
+      ],
+      "respuesta_correcta": "b",
+      "dificultad": "media",
+      "explicacion": "Gherkin es el lenguaje de BDD que usa la estructura Given-When-Then para escribir historias de usuario en lenguaje natural que puede ser interpretado por herramientas como Cucumber."
+    },
+    {
+      "id": "q15",
+      "tema": "Tema 2 — Mejora de Procesos, DMAIC, BDD y Poka-Yoke",
+      "texto": "¿Cuál de las siguientes herramientas es un framework que interpreta archivos .feature en Gherkin y ejecuta pruebas BDD automatizadas?",
+      "opciones": [
+        {"id": "a", "texto": "SonarQube"},
+        {"id": "b", "texto": "Cucumber"},
+        {"id": "c", "texto": "Jenkins"}
+      ],
+      "respuesta_correcta": "b",
+      "dificultad": "facil",
+      "explicacion": "Cucumber es el framework más popular para BDD, que interpreta archivos .feature escritos en Gherkin y ejecuta pruebas automatizadas basadas en esos escenarios."
+    },
+    {
+      "id": "q16",
+      "tema": "Tema 2 — Mejora de Procesos, DMAIC, BDD y Poka-Yoke",
+      "texto": "Un campo de formulario que no permite ingresar letras en un campo numérico es un ejemplo de Poka-Yoke de tipo:",
+      "opciones": [
+        {"id": "a", "texto": "Mitigación"},
+        {"id": "b", "texto": "Detección"},
+        {"id": "c", "texto": "Prevención"}
+      ],
+      "respuesta_correcta": "c",
+      "dificultad": "media",
+      "explicacion": "Este es un ejemplo de prevención, ya que evita que el error ocurra al inicio (no permite letras en campo numérico), en lugar de detectarlo después."
+    },
+    {
+      "id": "q17",
+      "tema": "Tema 2 — Mejora de Procesos, DMAIC, BDD y Poka-Yoke",
+      "texto": "¿Cuál empresa aplicó Scrum adaptado con el modelo de squads, tribes, chapters y guilds para escalar el trabajo ágil efectivamente?",
+      "opciones": [
+        {"id": "a", "texto": "Amazon"},
+        {"id": "b", "texto": "Spotify"},
+        {"id": "c", "texto": "Microsoft"}
+      ],
+      "respuesta_correcta": "b",
+      "dificultad": "facil",
+      "explicacion": "Spotify es famosa por su modelo de escalamiento ágil con squads (equipos pequeños autonomous), tribes (agrupaciones), chapters (expertos por área) y guilds (comunidades)."
+    },
+    {
+      "id": "q18",
+      "tema": "Tema 2 — Mejora de Procesos, DMAIC, BDD y Poka-Yoke",
+      "texto": "En la fase Controlar (Control) del DMAIC, ¿cuál es el objetivo principal?",
+      "opciones": [
+        {"id": "a", "texto": "Identificar las causas raíz de los defectos encontrados"},
+        {"id": "b", "texto": "Sostener los resultados de la mejora en el tiempo"},
+        {"id": "c", "texto": "Desarrollar e implementar las soluciones al problema"}
+      ],
+      "respuesta_correcta": "b",
+      "dificultad": "media",
+      "explicacion": "La fase Control busca mantener las mejoras logradas implementando controles y monitorización continua para asegurar que los beneficios se sostenidos en el tiempo."
+    },
+    {
+      "id": "q19",
+      "tema": "Tema 2 — Mejora de Procesos, DMAIC, BDD y Poka-Yoke",
+      "texto": "El FMEA (Failure Mode and Effects Analysis) se utiliza en la fase ______ del DMAIC para anticipar posibles fallas antes de implementar masivamente.",
+      "opciones": [
+        {"id": "a", "texto": "Implementar (Improve)"},
+        {"id": "b", "texto": "Medir"},
+        {"id": "c", "texto": "Definir"}
+      ],
+      "respuesta_correcta": "a",
+      "dificultad": "avanzada",
+      "explicacion": "FMEA se utiliza en la fase Improve para analizar posibles modos de falla antes de implementar soluciones a escala, permitiendo crear planes de contingencia."
+    },
+    {
+      "id": "q20",
+      "tema": "Tema 2 — Mejora de Procesos, DMAIC, BDD y Poka-Yoke",
+      "texto": "¿Cuál de las siguientes opciones es un ejemplo de Poka-Yoke de mitigación en software?",
+      "opciones": [
+        {"id": "a", "texto": "Validación en tiempo real del formato de un correo electrónico"},
+        {"id": "b", "texto": "Tipado estático en lenguajes como TypeScript"},
+        {"id": "c", "texto": "Guardado automático para no perder trabajo ante un error"}
+      ],
+      "respuesta_correcta": "c",
+      "dificultad": "avanzada",
+      "explicacion": "El guardado automático es un ejemplo de mitigación: no previene el error (olvido de guardar), pero reduce su impacto al recuperar automáticamente el trabajo."
+    },
+    {
+      "id": "q21",
+      "tema": "Tema 3 — Estándares de Calidad, QA y Tiempo",
+      "texto": "¿Cuál estándar internacional define las 8 características de calidad del producto de software (funcionalidad, rendimiento, usabilidad, etc.)?",
+      "opciones": [
+        {"id": "a", "texto": "ISO 9001"},
+        {"id": "b", "texto": "ISO/IEC 25010"},
+        {"id": "c", "texto": "CMMI Level 5"}
+      ],
+      "respuesta_correcta": "b",
+      "dificultad": "media",
+      "explicacion": "ISO/IEC 25010 es el estándar internacional que define el modelo de calidad para productos de software, incluyendo 8 características: funcionalidad, rendimiento, compatibilidad, usabilidad, confiabilidad, seguridad, mantenibilidad y portabilidad."
+    },
+    {
+      "id": "q22",
+      "tema": "Tema 3 — Estándares de Calidad, QA y Tiempo",
+      "texto": "La herramienta QA SonarQube tiene como función principal:",
+      "opciones": [
+        {"id": "a", "texto": "Automatizar pruebas de interfaz gráfica en navegadores web"},
+        {"id": "b", "texto": "Análisis estático de código para detectar bugs, vulnerabilidades y deuda técnica"},
+        {"id": "c", "texto": "Simular múltiples usuarios para realizar pruebas de carga"}
+      ],
+      "respuesta_correcta": "b",
+      "dificultad": "facil",
+      "explicacion": "SonarQube es una herramienta de análisis estático de código que examina el código fuente para detectar bugs, vulnerabilidades de seguridad y deuda técnica."
+    },
+    {
+      "id": "q23",
+      "tema": "Tema 3 — Estándares de Calidad, QA y Tiempo",
+      "texto": "¿Cuál métrica de calidad mide el tiempo promedio entre fallas del sistema? (Mayor valor = más confiable)",
+      "opciones": [
+        {"id": "a", "texto": "DPMO"},
+        {"id": "b", "texto": "MTTR"},
+        {"id": "c", "texto": "MTBF"}
+      ],
+      "respuesta_correcta": "c",
+      "dificultad": "media",
+      "explicacion": "MTBF (Mean Time Between Failures) mide el tiempo promedio entre fallas del sistema. Un valor mayor indica mayor confiabilidad y disponibilidad del sistema."
+    },
+    {
+      "id": "q24",
+      "tema": "Tema 3 — Estándares de Calidad, QA y Tiempo",
+      "texto": "La técnica de estimación ágil que usa naipes con la serie Fibonacci (1,2,3,5,8,13...) y el equipo debate hasta consenso se llama:",
+      "opciones": [
+        {"id": "a", "texto": "T-Shirt Sizing"},
+        {"id": "b", "texto": "Planning Poker"},
+        {"id": "c", "texto": "Story Mapping"}
+      ],
+      "respuesta_correcta": "b",
+      "dificultad": "facil",
+      "explicacion": "Planning Poker es una técnica de estimación colaborativa donde el equipo usa naipes con números Fibonacci para estimar el esfuerzo, promoviendo discusión y consenso."
+    },
+    {
+      "id": "q25",
+      "tema": "Tema 3 — Estándares de Calidad, QA y Tiempo",
+      "texto": "El Burndown Chart en Scrum muestra:",
+      "opciones": [
+        {"id": "a", "texto": "El trabajo completado acumulado versus el alcance total del proyecto"},
+        {"id": "b", "texto": "El flujo de trabajo en Kanban identificando cuellos de botella"},
+        {"id": "c", "texto": "El trabajo restante versus el tiempo disponible en el Sprint"}
+      ],
+      "respuesta_correcta": "c",
+      "dificultad": "facil",
+      "explicacion": "El Burndown Chart muestra el trabajo restante versus el tiempo disponible en el Sprint, permitiendo al equipo seguir su ritmo y predecir si completarán las historias a tiempo."
+    },
+    {
+      "id": "q26",
+      "tema": "Tema 3 — Estándares de Calidad, QA y Tiempo",
+      "texto": "En el ciclo PDCA (Rueda de Deming), ¿qué significa la fase 'Act' (Actuar)?",
+      "opciones": [
+        {"id": "a", "texto": "Implementar la solución en pequeña escala como prueba piloto"},
+        {"id": "b", "texto": "Estandarizar si la solución funcionó; ajustar y repetir si no funcionó"},
+        {"id": "c", "texto": "Medir los resultados y comparar con los objetivos definidos"}
+      ],
+      "respuesta_correcta": "b",
+      "dificultad": "media",
+      "explicacion": "La fase Act significa estandarizar la solución si funcionó correctamente, o ajustar y repetir el ciclo si no alcanzó los objetivos deseados."
+    },
+    {
+      "id": "q27",
+      "tema": "Tema 3 — Estándares de Calidad, QA y Tiempo",
+      "texto": "La técnica Pomodoro divide el trabajo en bloques de trabajo intenso de:",
+      "opciones": [
+        {"id": "a", "texto": "45 minutos seguidos de 10 minutos de descanso"},
+        {"id": "b", "texto": "25 minutos seguidos de 5 minutos de descanso"},
+        {"id": "c", "texto": "60 minutos seguidos de 15 minutos de descanso"}
+      ],
+      "respuesta_correcta": "b",
+      "dificultad": "facil",
+      "explicacion": "La técnica Pomodoro consiste en bloques de 25 minutos de trabajo intenso seguidos de 5 minutos de descanso, después de 4 ciclos se toma un descanso más largo."
+    },
+    {
+      "id": "q28",
+      "tema": "Tema 4 — Comunicación Oral y Escrita",
+      "texto": "Según Albert Mehrabian, ¿qué porcentaje del mensaje en una comunicación cara a cara proviene del lenguaje corporal?",
+      "opciones": [
+        {"id": "a", "texto": "7%"},
+        {"id": "b", "texto": "38%"},
+        {"id": "c", "texto": "55%"}
+      ],
+      "respuesta_correcta": "c",
+      "dificultad": "facil",
+      "explicacion": "Según la investigación de Mehrabian, el 55% de la comunicación emocional proviene del lenguaje corporal, el 38% del tono de voz y solo el 7% de las palabras."
+    },
+    {
+      "id": "q29",
+      "tema": "Tema 4 — Comunicación Oral y Escrita",
+      "texto": "Las '4 C's' de la comunicación escrita profesional son:",
+      "opciones": [
+        {"id": "a", "texto": "Claridad, Concisión, Corrección y Cortesía"},
+        {"id": "b", "texto": "Creatividad, Claridad, Concisión y Control"},
+        {"id": "c", "texto": "Confianza, Cortesía, Competencia y Coherencia"}
+      ],
+      "respuesta_correcta": "a",
+      "dificultad": "media",
+      "explicacion": "Las 4 C's de comunicación escrita son: Claridad (mensaje claro), Concisión (al punto), Corrección (sin errores) y Cortesía (respetuoso)."
+    },
+    {
+      "id": "q30",
+      "tema": "Tema 4 — Comunicación Oral y Escrita",
+      "texto": "En una reunión virtual por Teams o Zoom, ¿cuál de las siguientes prácticas es correcta para garantizar seguridad y orden?",
+      "opciones": [
+        {"id": "a", "texto": "Compartir el enlace de la reunión en redes sociales para mayor asistencia"},
+        {"id": "b", "texto": "Activar la sala de espera (waiting room) para controlar el acceso a la reunión"},
+        {"id": "c", "texto": "Dejar el micrófono siempre activado para facilitar la comunicación espontánea"}
+      ],
+      "respuesta_correcta": "b",
+      "dificultad": "facil",
+      "explicacion": "La sala de espera permite al anfitrión revisar quién quiere entrar antes de admitir participantes, garantizando seguridad y control en reuniones virtuales."
+    },
+    {
+      "id": "q31",
+      "tema": "Tema 4 — Comunicación Oral y Escrita",
+      "texto": "¿Cuál tipo de documento ejecutivo en TI tiene la estructura: problema, objetivo, alcance, metodología, cronograma, presupuesto y riesgos?",
+      "opciones": [
+        {"id": "a", "texto": "Reporte de estado (Status Report)"},
+        {"id": "b", "texto": "Propuesta de proyecto"},
+        {"id": "c", "texto": "Memoria de reunión (Acta)"}
+      ],
+      "respuesta_correcta": "b",
+      "dificultad": "media",
+      "explicacion": "La propuesta de proyecto incluye: problema, objetivo, alcance, metodología, cronograma, presupuesto y riesgos para presentar formalmente un proyecto."
+    },
+    {
+      "id": "q32",
+      "tema": "Tema 5 — Tecnología y Crisis Climática",
+      "texto": "Según el material, ¿cuánto ha aumentado la temperatura promedio de la Tierra desde la era preindustrial y cuál es la meta del Acuerdo de París?",
+      "opciones": [
+        {"id": "a", "texto": "0.5°C de aumento; limitar a 1°C"},
+        {"id": "b", "texto": "1.2°C de aumento; limitar a 1.5°C"},
+        {"id": "c", "texto": "2.0°C de aumento; limitar a 2.5°C"}
+      ],
+      "respuesta_correcta": "b",
+      "dificultad": "media",
+      "explicacion": "La temperatura promedio ha aumentado aproximadamente 1.2°C desde la era preindustrial, y el Acuerdo de París establece limitar el calentamiento a 1.5°C."
+    },
+    {
+      "id": "q33",
+      "tema": "Tema 5 — Tecnología y Crisis Climática",
+      "texto": "Costa Rica genera más del 99% de su electricidad a partir de fuentes renovables y tiene como meta de política climática:",
+      "opciones": [
+        {"id": "a", "texto": "Ser carbono neutral para el año 2030"},
+        {"id": "b", "texto": "Ser carbono neutral para el año 2050"},
+        {"id": "c", "texto": "Reducir emisiones en un 50% para el año 2035"}
+      ],
+      "respuesta_correcta": "b",
+      "dificultad": "media",
+      "explicacion": "Costa Rica se ha comprometido a ser carbono neutral para el año 2050, siendo líder en políticas ambientales y energías renovables en América Latina."
+    },
+    {
+      "id": "q34",
+      "tema": "Tema 5 — Tecnología y Crisis Climática",
+      "texto": "Según la organización GeSI, ¿en qué porcentaje podrían las TI reducir las emisiones globales de carbono para el año 2030?",
+      "opciones": [
+        {"id": "a", "texto": "5%"},
+        {"id": "b", "texto": "10%"},
+        {"id": "c", "texto": "20%"}
+      ],
+      "respuesta_correcta": "c",
+      "dificultad": "avanzada",
+      "explicacion": "Según GeSI (Global e-Sustainability Initiative), las tecnologías de información podrían reducir las emisiones globales hasta en un 20% para 2030."
+    },
+    {
+      "id": "q35",
+      "tema": "Tema 5 — Tecnología y Crisis Climática",
+      "texto": "Los 'gemelos digitales' (Digital Twins) contribuyen a la sostenibilidad ambiental porque:",
+      "opciones": [
+        {"id": "a", "texto": "Reemplazan físicamente las instalaciones industriales por versiones más eficientes"},
+        {"id": "b", "texto": "Permiten modelar virtualmente edificios o fábricas para optimizar el consumo energético antes de construir"},
+        {"id": "c", "texto": "Duplican los servidores en la nube para garantizar disponibilidad del servicio"}
+      ],
+      "respuesta_correcta": "b",
+      "dificultad": "media",
+      "explicacion": "Los gemelos digitales permiten crear réplicas virtuales de edificios o fábricas para simular y optimizar el consumo energético antes de la construcción física, reduciendo desperdicio."
+    }
+  ]
+}

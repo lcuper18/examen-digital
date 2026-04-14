@@ -1,0 +1,38 @@
+{
+  "version": "1.0",
+  "ultima_actualizacion": "2026-04-14",
+  "examenes": [
+    {
+      "id": "mantenimiento-laptops",
+      "titulo": "Mantenimiento de Laptops",
+      "archivo": "preguntas.json",
+      "descripcion": "Examen sobre mantenimiento, reparación y diagnóstico de computadoras portátiles",
+      "institucion": "CTP Las Palmitas",
+      "nivel": "Undécimo Nivel",
+      "categoria": "Tecnología",
+      "dificultad": "Intermedia",
+      "preguntas": 30,
+      "duracion": 60,
+      "porcentaje_aprobacion": 60,
+      "tags": ["hardware", "laptops", "reparación", "diagnóstico", "componentes"],
+      "version": "1.0",
+      "fecha_creacion": "2025-01-15"
+    },
+    {
+      "id": "gestion-calidad",
+      "titulo": "Gestión de Calidad",
+      "archivo": "Examenes/GestionCalidad.json",
+      "descripcion": "Examen sobre metodologías de calidad, mejora continua y estándares internacionales",
+      "institucion": "CTP Las Palmitas",
+      "nivel": "Undécimo Nivel",
+      "categoria": "Gestión",
+      "dificultad": "Avanzada",
+      "preguntas": 30,
+      "duracion": 45,
+      "porcentaje_aprobacion": 60,
+      "tags": ["calidad", "mejora continua", "scrum", "lean", "iso", "dmaic"],
+      "version": "1.0",
+      "fecha_creacion": "2025-01-15"
+    }
+  ]
+}

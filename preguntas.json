@@ -1,0 +1,409 @@
+{
+  "metadata": {
+    "id": "mantenimiento-laptops",
+    "titulo": "Mantenimiento de Laptops",
+    "descripcion": "Examen sobre mantenimiento, reparación y diagnóstico de computadoras portátiles",
+    "institucion": "CTP Las Palmitas",
+    "nivel": "Undécimo Nivel",
+    "duracion_minutos": 60,
+    "preguntas_totales": 30,
+    "porcentaje_aprobacion": 60,
+    "categoria": "Tecnología",
+    "dificultad": "Intermedia",
+    "tags": ["hardware", "laptops", "reparación", "diagnóstico", "componentes"],
+    "version": "1.0",
+    "fecha_creacion": "2025-01-15"
+  },
+  "preguntas": [
+    {
+      "id": "q1",
+      "tema": "Tema 1 — Componentes Internos de la Computadora Portátil",
+      "texto": "¿Cuál es el componente principal de la laptop que interconecta todos los demás elementos del sistema?",
+      "opciones": [
+        {"id": "a", "texto": "El procesador (CPU)"},
+        {"id": "b", "texto": "La tarjeta madre (motherboard)"},
+        {"id": "c", "texto": "La memoria RAM"}
+      ],
+      "respuesta_correcta": "b",
+      "dificultad": "facil",
+      "explicacion": "La tarjeta madre es el componente central que conecta todos los demás elementos del sistema, incluyendo el procesador, memoria, almacenamiento y periféricos."
+    },
+    {
+      "id": "q2",
+      "tema": "Tema 1 — Componentes Internos de la Computadora Portátil",
+      "texto": "¿Qué tipo de almacenamiento usa el protocolo NVMe por PCIe y puede alcanzar velocidades de hasta 7000 MB/s?",
+      "opciones": [
+        {"id": "a", "texto": "HDD SATA"},
+        {"id": "b", "texto": "SSD SATA 2.5\""},
+        {"id": "c", "texto": "SSD M.2 NVMe"}
+      ],
+      "respuesta_correcta": "c",
+      "dificultad": "media",
+      "explicacion": "Los SSD M.2 NVMe utilizan el protocolo NVMe sobre PCIe, ofreciendo velocidades significativamente superiores a los SSD SATA, pudiendo alcanzar hasta 7000 MB/s en las versiones más rápidas."
+    },
+    {
+      "id": "q3",
+      "tema": "Tema 1 — Componentes Internos de la Computadora Portátil",
+      "texto": "La memoria eMMC en laptops se caracteriza principalmente por:",
+      "opciones": [
+        {"id": "a", "texto": "Ser la más rápida del mercado y usada en laptops gaming"},
+        {"id": "b", "texto": "Estar soldada a la tarjeta madre y no ser reemplazable"},
+        {"id": "c", "texto": "Usar interfaz M.2 NVMe con velocidades superiores a los HDD"}
+      ],
+      "respuesta_correcta": "b",
+      "dificultad": "media",
+      "explicacion": "La memoria eMMC está soldada directamente a la tarjeta madre en la mayoría de laptops, lo que significa que no puede ser reemplazada por el usuario. Es común en laptops económicas."
+    },
+    {
+      "id": "q4",
+      "tema": "Tema 1 — Componentes Internos de la Computadora Portátil",
+      "texto": "Una GPU integrada (iGPU) como Intel UHD se diferencia de una GPU dedicada porque:",
+      "opciones": [
+        {"id": "a", "texto": "Tiene su propia VRAM y mayor rendimiento para juegos y diseño"},
+        {"id": "b", "texto": "Está incorporada en el chip del procesador y comparte la RAM del sistema"},
+        {"id": "c", "texto": "Se instala en un slot PCIe separado y puede reemplazarse fácilmente"}
+      ],
+      "respuesta_correcta": "b",
+      "dificultad": "media",
+      "explicacion": "Las GPUs integradas están integradas en el mismo chip del procesador (SoC) y utilizan una porción de la memoria RAM del sistema como memoria de video, a diferencia de las GPUs dedicadas que tienen su propia VRAM."
+    },
+    {
+      "id": "q5",
+      "tema": "Tema 1 — Componentes Internos de la Computadora Portátil",
+      "texto": "¿Qué puerto de una laptop permite transferencia de datos, carga y salida de video a alta velocidad en un mismo conector?",
+      "opciones": [
+        {"id": "a", "texto": "USB-A 3.0"},
+        {"id": "b", "texto": "RJ-45 (Ethernet)"},
+        {"id": "c", "texto": "USB-C / Thunderbolt"}
+      ],
+      "respuesta_correcta": "c",
+      "dificultad": "facil",
+      "explicacion": "USB-C y especialmente Thunderbolt permiten transferencia de datos a alta velocidad, carga de dispositivos y salida de video (DisplayPort/HDMI) a través de un único conector versátil."
+    },
+    {
+      "id": "q6",
+      "tema": "Tema 1 — Componentes Internos de la Computadora Portátil",
+      "texto": "El formato de memoria RAM utilizado en laptops, más pequeño que el DIMM de escritorio, se llama:",
+      "opciones": [
+        {"id": "a", "texto": "SODIMM"},
+        {"id": "b", "texto": "DIMM ECC"},
+        {"id": "c", "texto": "DDR5 Full-Size"}
+      ],
+      "respuesta_correcta": "a",
+      "dificultad": "facil",
+      "explicacion": "SODIMM (Small Outline Dual In-Line Memory Module) es el formato de memoria RAM utilizado en laptops, siendo significativamente más pequeño que los módulos DIMM de escritorio."
+    },
+    {
+      "id": "q7",
+      "tema": "Tema 1 — Componentes Internos de la Computadora Portátil",
+      "texto": "¿Cuál es la función del chipset en la tarjeta madre de una laptop?",
+      "opciones": [
+        {"id": "a", "texto": "Almacenar el firmware de arranque del sistema operativo"},
+        {"id": "b", "texto": "Controlar la comunicación entre el procesador, memoria y demás componentes"},
+        {"id": "c", "texto": "Regular la carga y descarga de la batería"}
+      ],
+      "respuesta_correcta": "b",
+      "dificultad": "media",
+      "explicacion": "El chipset controla la comunicación entre el procesador, la memoria, los dispositivos de almacenamiento y los periféricos. Es el 'puente' que conecta todos los componentes principales."
+    },
+    {
+      "id": "q8",
+      "tema": "Tema 1 — Componentes Internos de la Computadora Portátil",
+      "texto": "El sistema de enfriamiento de una laptop compuesto por tubos de cobre sellados que transfieren calor del chip al radiador se denomina:",
+      "opciones": [
+        {"id": "a", "texto": "Disipador de aluminio"},
+        {"id": "b", "texto": "Heat pipes"},
+        {"id": "c", "texto": "Ventilador centrífugo"}
+      ],
+      "respuesta_correcta": "b",
+      "dificultad": "media",
+      "explicacion": "Los heat pipes son tubos de cobre sellados que contienen un líquido refrigerante que se evapora y condensa continuamente, transfiriendo eficientemente el calor del chip al radiador."
+    },
+    {
+      "id": "q9",
+      "tema": "Tema 1 — Componentes Internos de la Computadora Portátil",
+      "texto": "¿Cuál componente de la laptop almacena el firmware de arranque del sistema?",
+      "opciones": [
+        {"id": "a", "texto": "Ranura SODIMM"},
+        {"id": "b", "texto": "Conector SATA"},
+        {"id": "c", "texto": "Chip BIOS/UEFI"}
+      ],
+      "respuesta_correcta": "c",
+      "dificultad": "facil",
+      "explicacion": "El chip BIOS/UEFI es una memoria no volátil que almacena el firmware de arranque, permitiendo que la laptop inicialice el sistema operativo y configure el hardware."
+    },
+    {
+      "id": "q10",
+      "tema": "Tema 1 — Componentes Internos de la Computadora Portátil",
+      "texto": "¿Cuál es una diferencia clave entre los discos de laptop y los de computadora de escritorio en cuanto a factor de forma?",
+      "opciones": [
+        {"id": "a", "texto": "Las laptops usan discos de 3.5\" mientras que los escritorios usan 2.5\""},
+        {"id": "b", "texto": "Las laptops usan formato 2.5\" o M.2; los escritorios usan formato 3.5\""},
+        {"id": "c", "texto": "Ambos tipos usan el mismo formato físico pero diferente interfaz"}
+      ],
+      "respuesta_correcta": "b",
+      "dificultad": "facil",
+      "explicacion": "Las laptops usan discos de formato 2.5\" (para HDD/SSD SATA) o M.2, mientras que las computadoras de escritorio típicamente usan discos de 3.5\" para HDD y pueden usar M.2 también."
+    },
+    {
+      "id": "q11",
+      "tema": "Tema 2 — Diagnóstico del Sistema en Computadoras Portátiles",
+      "texto": "¿Qué herramienta de Windows muestra un resumen completo del hardware y software incluyendo CPU, RAM, placa base y versión de BIOS?",
+      "opciones": [
+        {"id": "a", "texto": "taskmgr (Administrador de tareas)"},
+        {"id": "b", "texto": "msinfo32 (Información del sistema)"},
+        {"id": "c", "texto": "chkdsk"}
+      ],
+      "respuesta_correcta": "b",
+      "dificultad": "facil",
+      "explicacion": "Msinfo32 (Información del sistema) proporciona un resumen completo del hardware y software del sistema, incluyendo procesador, memoria, placa base y versión del BIOS/UEFI."
+    },
+    {
+      "id": "q12",
+      "tema": "Tema 2 — Diagnóstico del Sistema en Computadoras Portátiles",
+      "texto": "La herramienta MemTest86 se utiliza para:",
+      "opciones": [
+        {"id": "a", "texto": "Realizar diagnóstico exhaustivo de RAM iniciando desde USB, independiente del sistema operativo"},
+        {"id": "b", "texto": "Monitorear la temperatura del procesador en tiempo real desde Windows"},
+        {"id": "c", "texto": "Analizar y reparar errores del sistema de archivos en el disco duro"}
+      ],
+      "respuesta_correcta": "a",
+      "dificultad": "media",
+      "explicacion": "MemTest86 es una herramienta de diagnóstico de memoria que se ejecuta desde USB/CD arrancable, probando la RAM de forma exhaustiva e independiente del sistema operativo."
+    },
+    {
+      "id": "q13",
+      "tema": "Tema 2 — Diagnóstico del Sistema en Computadoras Portátiles",
+      "texto": "¿Qué software especializado de terceros muestra el estado SMART del disco duro/SSD, temperatura y sectores dañados?",
+      "opciones": [
+        {"id": "a", "texto": "CPU-Z"},
+        {"id": "b", "texto": "Prime95"},
+        {"id": "c", "texto": "CrystalDiskInfo"}
+      ],
+      "respuesta_correcta": "c",
+      "dificultad": "facil",
+      "explicacion": "CrystalDiskInfo es una herramienta gratuita que muestra el estado SMART de discos duros y SSD, incluyendo temperatura, horas de uso y sectores dañados."
+    },
+    {
+      "id": "q14",
+      "tema": "Tema 2 — Diagnóstico del Sistema en Computadoras Portátiles",
+      "texto": "Hiren's BootCD PE es un dispositivo de recuperación que se describe como:",
+      "opciones": [
+        {"id": "a", "texto": "Herramienta oficial de Microsoft para crear USB booteables con Windows 10/11"},
+        {"id": "b", "texto": "Distribución especializada con múltiples herramientas de diagnóstico, recuperación y reparación"},
+        {"id": "c", "texto": "Software para clonar y respaldar discos completos en tiempo real"}
+      ],
+      "respuesta_correcta": "b",
+      "dificultad": "media",
+      "explicacion": "Hiren's BootCD PE es una distribución de recuperación que incluye múltiples herramientas de diagnóstico, recuperación y reparación de sistemas, útil cuando el sistema operativo no inicia."
+    },
+    {
+      "id": "q15",
+      "tema": "Tema 2 — Diagnóstico del Sistema en Computadoras Portátiles",
+      "texto": "En el diagnóstico de una laptop, una temperatura del CPU superior a 90°C indica:",
+      "opciones": [
+        {"id": "a", "texto": "Funcionamiento normal bajo carga máxima de procesamiento"},
+        {"id": "b", "texto": "Pasta térmica agotada o ventilador obstruido/dañado"},
+        {"id": "c", "texto": "Fallo en el chip de memoria RAM que genera calor excesivo"}
+      ],
+      "respuesta_correcta": "b",
+      "dificultad": "media",
+      "explicacion": "Temperaturas superiores a 90°C son anormales e indican problemas de enfriamiento, como pasta térmica agotada, ventilador obstruido o dañado, o acumulación de polvo."
+    },
+    {
+      "id": "q16",
+      "tema": "Tema 2 — Diagnóstico del Sistema en Computadoras Portátiles",
+      "texto": "¿Cuál herramienta de Windows permite analizar y reparar errores del sistema de archivos en el disco duro?",
+      "opciones": [
+        {"id": "a", "texto": "resmon"},
+        {"id": "b", "texto": "mdsched"},
+        {"id": "c", "texto": "chkdsk"}
+      ],
+      "respuesta_correcta": "c",
+      "dificultad": "facil",
+      "explicacion": "Chkdsk (Check Disk) es una herramienta de Windows que analiza y repara errores del sistema de archivos en el disco duro. Se puede ejecutar desde la línea de comandos."
+    },
+    {
+      "id": "q17",
+      "tema": "Tema 2 — Diagnóstico del Sistema en Computadoras Portátiles",
+      "texto": "La herramienta FurMark se usa principalmente para:",
+      "opciones": [
+        {"id": "a", "texto": "Diagnosticar errores en módulos de RAM mediante pruebas de escritura y lectura"},
+        {"id": "b", "texto": "Realizar prueba de estrés de la GPU para detectar fallas o sobrecalentamiento gráfico"},
+        {"id": "c", "texto": "Medir la velocidad de lectura y escritura del disco duro o SSD"}
+      ],
+      "respuesta_correcta": "b",
+      "dificultad": "media",
+      "explicacion": "FurMark es una herramienta de estrés gráfico que genera carga extrema en la GPU para probar estabilidad térmica y detectar fallas o sobrecalentamiento."
+    },
+    {
+      "id": "q18",
+      "tema": "Tema 2 — Diagnóstico del Sistema en Computadoras Portátiles",
+      "texto": "Antes de utilizar herramientas de software para diagnóstico, el técnico debe iniciar con:",
+      "opciones": [
+        {"id": "a", "texto": "Instalar inmediatamente el sistema operativo más reciente disponible"},
+        {"id": "b", "texto": "Una inspección visual y funcional del equipo (golpes, encendido, temperatura, sonidos anómalos)"},
+        {"id": "c", "texto": "Ejecutar MemTest86 desde USB para descartar fallos de memoria"}
+      ],
+      "respuesta_correcta": "b",
+      "dificultad": "facil",
+      "explicacion": "La inspección visual y funcional es el primer paso esencial en cualquier diagnóstico, permitiendo identificar problemas físicos obvios antes de usar herramientas de software."
+    },
+    {
+      "id": "q19",
+      "tema": "Tema 3 — Instalación de Componentes Internos y Dispositivos",
+      "texto": "Antes de manipular cualquier componente interno de una laptop, ¿cuál es el primer paso obligatorio de seguridad?",
+      "opciones": [
+        {"id": "a", "texto": "Actualizar los drivers del sistema al más reciente disponible"},
+        {"id": "b", "texto": "Desconectar el cargador y apagar completamente el equipo"},
+        {"id": "c", "texto": "Ejecutar una herramienta de diagnóstico para conocer el estado del hardware"}
+      ],
+      "respuesta_correcta": "b",
+      "dificultad": "facil",
+      "explicacion": "Siempre debes desconectar el cargador y apagar completamente el equipo antes de manipular componentes internos para evitar descargas electrostáticas y daños."
+    },
+    {
+      "id": "q20",
+      "tema": "Tema 3 — Instalación de Componentes Internos y Dispositivos",
+      "texto": "¿Cuál tipo de RAM es el más común en laptops fabricadas entre 2016 y 2022, opera a 1.2V y soporta velocidades de 2133-3200 MHz?",
+      "opciones": [
+        {"id": "a", "texto": "DDR3L"},
+        {"id": "b", "texto": "DDR4"},
+        {"id": "c", "texto": "LPDDR5"}
+      ],
+      "respuesta_correcta": "b",
+      "dificultad": "media",
+      "explicacion": "DDR4 es el estándar que se usó masivamente en laptops entre 2016-2022, operando a 1.2V y ofreciendo velocidades de 2133-3200 MHz, mejorando eficiencia respecto a DDR3."
+    },
+    {
+      "id": "q21",
+      "tema": "Tema 3 — Instalación de Componentes Internos y Dispositivos",
+      "texto": "Al instalar un módulo SODIMM de RAM, ¿en qué ángulo se inserta antes de presionarlo hacia abajo para que las palancas cierren?",
+      "opciones": [
+        {"id": "a", "texto": "45 grados"},
+        {"id": "b", "texto": "90 grados"},
+        {"id": "c", "texto": "30 grados"}
+      ],
+      "respuesta_correcta": "c",
+      "dificultad": "media",
+      "explicacion": "El módulo SODIMM se inserta a aproximadamente 30 grados respecto a la ranura, luego se presiona hacia abajo hasta que las palancas de retención cierren automáticamente."
+    },
+    {
+      "id": "q22",
+      "tema": "Tema 3 — Instalación de Componentes Internos y Dispositivos",
+      "texto": "Para limpiar la pasta térmica antigua del chip y del disipador se utiliza:",
+      "opciones": [
+        {"id": "a", "texto": "Agua destilada con un pano de microfibra"},
+        {"id": "b", "texto": "Alcohol isopropílico (>90%) e hisopos"},
+        {"id": "c", "texto": "Aire comprimido y palanca de plástico"}
+      ],
+      "respuesta_correcta": "b",
+      "dificultad": "facil",
+      "explicacion": "El alcohol isopropílico de alta concentración (>90%) es ideal para limpiar pasta térmica seca, ya que evapora rápidamente sin dejar residuos y no daña los componentes."
+    },
+    {
+      "id": "q23",
+      "tema": "Tema 3 — Instalación de Componentes Internos y Dispositivos",
+      "texto": "Al instalar una tarjeta de red Wi-Fi M.2 2230, las antenas de colores negro y blanco se conectan respectivamente en:",
+      "opciones": [
+        {"id": "a", "texto": "Blanco en MAIN y negro en AUX"},
+        {"id": "b", "texto": "Negro en MAIN (principal) y blanco en AUX (auxiliar)"},
+        {"id": "c", "texto": "Ambas antenas son intercambiables sin diferencia funcional"}
+      ],
+      "respuesta_correcta": "b",
+      "dificultad": "media",
+      "explicacion": "La antenna negra se conecta al conector MAIN (principal) y la blanca al AUX (auxiliar). Conectarlas incorrectamente puede reducir la potencia de señal significativamente."
+    },
+    {
+      "id": "q24",
+      "tema": "Tema 3 — Instalación de Componentes Internos y Dispositivos",
+      "texto": "El BIOS/UEFI ejecuta el POST al encender el equipo. ¿Qué significa POST?",
+      "opciones": [
+        {"id": "a", "texto": "Protocol Operating System Test"},
+        {"id": "b", "texto": "Power-On Self Test"},
+        {"id": "c", "texto": "Pre-Operation System Transfer"}
+      ],
+      "respuesta_correcta": "b",
+      "dificultad": "facil",
+      "explicacion": "POST (Power-On Self Test) es una serie de pruebas de diagnóstico que el BIOS/UEFI ejecuta al encender la computadora para verificar que el hardware funcione correctamente."
+    },
+    {
+      "id": "q25",
+      "tema": "Tema 3 — Instalación de Componentes Internos y Dispositivos",
+      "texto": "¿Cuál es la tecla de acceso al BIOS/UEFI en laptops Lenovo ThinkPad?",
+      "opciones": [
+        {"id": "a", "texto": "F10 o Esc"},
+        {"id": "b", "texto": "DEL o F2 (ASUS)"},
+        {"id": "c", "texto": "F1 o F2 o Enter + F1"}
+      ],
+      "respuesta_correcta": "c",
+      "dificultad": "media",
+      "explicacion": "En Lenovo ThinkPad, las teclas para acceder al BIOS son F1, F2 o la combinación Enter+F1, dependiendo del modelo específico."
+    },
+    {
+      "id": "q26",
+      "tema": "Tema 4 — Técnicas de Reparación de Laptops según Tipo y Marca",
+      "texto": "¿Qué tipo de tornillo especial utilizan las laptops Apple MacBook Pro/Air para abrir la tapa inferior?",
+      "opciones": [
+        {"id": "a", "texto": "Torx T8"},
+        {"id": "b", "texto": "Phillips PH000"},
+        {"id": "c", "texto": "Pentalobe P5"}
+      ],
+      "respuesta_correcta": "c",
+      "dificultad": "media",
+      "explicacion": "Apple utiliza tornillos Pentalobe P5 específicamente diseñados para disuadir la apertura no autorizada. Se necesita un destornillador especial para quitarlos."
+    },
+    {
+      "id": "q27",
+      "tema": "Tema 4 — Técnicas de Reparación de Laptops según Tipo y Marca",
+      "texto": "¿Cuál tipo de panel de pantalla ofrece negros perfectos, colores vibrantes y contraste infinito, usado en laptops premium?",
+      "opciones": [
+        {"id": "a", "texto": "TN (Twisted Nematic)"},
+        {"id": "b", "texto": "IPS (In-Plane Switching)"},
+        {"id": "c", "texto": "OLED"}
+      ],
+      "respuesta_correcta": "c",
+      "dificultad": "facil",
+      "explicacion": "Los paneles OLED ofrecen negros perfectos porque cada pixel emite su propia luz, mientras que TN e IPS son tecnologías LCD que requieren retroiluminación."
+    },
+    {
+      "id": "q28",
+      "tema": "Tema 4 — Técnicas de Reparación de Laptops según Tipo y Marca",
+      "texto": "Si una laptop muestra imagen en un monitor externo vía HDMI pero la pantalla integrada aparece en negro, esto indica:",
+      "opciones": [
+        {"id": "a", "texto": "Falla en la GPU que impide procesar señal de video"},
+        {"id": "b", "texto": "Panel o cable interno dañado, pero la GPU funciona correctamente"},
+        {"id": "c", "texto": "RAM insuficiente que afecta el buffer de pantalla integrada"}
+      ],
+      "respuesta_correcta": "b",
+      "dificultad": "media",
+      "explicacion": "Si funciona el monitor externo pero no la pantalla integrada, el problema está en el panel LCD, el cable flex o el inversor, no en la GPU que funciona correctamente."
+    },
+    {
+      "id": "q29",
+      "tema": "Tema 4 — Técnicas de Reparación de Laptops según Tipo y Marca",
+      "texto": "Una batería inflada (swollen battery) en una laptop representa una emergencia porque:",
+      "opciones": [
+        {"id": "a", "texto": "Reduce la velocidad del procesador al disminuir el voltaje disponible"},
+        {"id": "b", "texto": "El gas interno puede causar incendio y debe retirarse en área ventilada"},
+        {"id": "c", "texto": "Genera interferencia electromagnética que daña el módulo Wi-Fi"}
+      ],
+      "respuesta_correcta": "b",
+      "dificultad": "media",
+      "explicacion": "Las baterías de litio infladas contienen gases inflamables que pueden causar incendio o explosión. Deben manipularse con extrema precaución y desecharse apropiadamente."
+    },
+    {
+      "id": "q30",
+      "tema": "Tema 4 — Técnicas de Reparación de Laptops según Tipo y Marca",
+      "texto": "En conectores ZIF (Zero Insertion Force) para cables flex, el procedimiento correcto es:",
+      "opciones": [
+        {"id": "a", "texto": "Insertar el cable con fuerza moderada hasta escuchar un clic de confirmación"},
+        {"id": "b", "texto": "Levantar la pestaña negra del conector antes de insertar o retirar el cable, y cerrarla después"},
+        {"id": "c", "texto": "Aplicar adhesivo térmico al cable antes de insertar para asegurar contacto eléctrico"}
+      ],
+      "respuesta_correcta": "b",
+      "dificultad": "media",
+      "explicacion": "Los conectores ZIF tienen una pestaña que debe levantarse (abrirse) antes de insertar o retirar el cable, luego se cierra (baja) para asegurar el cable en su lugar."
+    }
+  ]
+}
