@@ -1433,6 +1433,12 @@
       storageExpiry: 7 * 24 * 60 * 60 * 1000 // 7 días
     };
 
+    // ==================== BANCO DE EXÁMENES ====================
+    let examenesDisponibles = [];
+    let examenesFiltrados = [];
+    let examenSeleccionado = null;
+    let examMetadata = {};
+
     // ==================== CARGAR PREGUNTAS DESDE JSON ====================
     let questionsOriginal = [];
     let questionsLoaded = false;
@@ -1463,7 +1469,7 @@
     let startTime = null;
 
     // ==================== UTILIDADES ====================
-    
+
     // Validar formato de cédula costarricense
     function validateCedula(cedula) {
       if (!cedula) return true; // Es opcional
@@ -1471,7 +1477,7 @@
       const regex = /^(\d{1}-\d{4}-\d{4}|\d{9})$/;
       return regex.test(cedula);
     }
-    
+
     // Formatear cédula
     function formatCedula(value) {
       const digits = value.replace(/\D/g, '');
@@ -1479,7 +1485,7 @@
       if (digits.length <= 5) return `${digits.slice(0,1)}-${digits.slice(1)}`;
       return `${digits.slice(0,1)}-${digits.slice(1,5)}-${digits.slice(5,9)}`;
     }
-    
+
     // Barajar array (Fisher-Yates)
     function shuffleArray(array) {
       const shuffled = [...array];
@@ -1489,21 +1495,21 @@
       }
       return shuffled;
     }
-    
+
     // Obtener datos del localStorage
     function getStorageData() {
       try {
         const data = localStorage.getItem(EXAM_CONFIG.storageKey);
         if (!data) return null;
-        
+
         const parsed = JSON.parse(data);
-        
+
         // Verificar si ha expirado
         if (Date.now() - parsed.timestamp > EXAM_CONFIG.storageExpiry) {
           localStorage.removeItem(EXAM_CONFIG.storageKey);
           return null;
         }
-        
+
         return parsed;
       } catch (e) {
         return null;
@@ -1530,6 +1536,217 @@
     // Limpiar storage
     function clearStorage() {
       localStorage.removeItem(EXAM_CONFIG.storageKey);
+    }
+
+    // ==================== BANCO DE EXÁMENES - FUNCIONES ====================
+
+    // Cargar catálogo de exámenes desde examenes.json
+    async function cargarCatalogoExamenes() {
+      try {
+        const response = await fetch('examenes.json');
+        if (!response.ok) throw new Error('No se pudo cargar el catálogo');
+
+        const data = await response.json();
+        examenesDisponibles = data.examenes || [];
+        examenesFiltrados = [...examenesDisponibles];
+
+        console.log(`✅ Catálogo cargado: ${examenesDisponibles.length} exámenes`);
+        renderizarCatalogoExamenes();
+      } catch (error) {
+        console.error('❌ Error al cargar catálogo:', error);
+        // Fallback con datos básicos
+        examenesDisponibles = [
+          {
+            id: 'mantenimiento-laptops',
+            titulo: 'Mantenimiento de Laptops',
+            archivo: 'preguntas.json',
+            descripcion: 'Examen sobre mantenimiento y reparación de laptops',
+            institucion: 'CTP Las Palmitas',
+            nivel: 'Undécimo Nivel',
+            categoria: 'Tecnología',
+            dificultad: 'Intermedia',
+            duracion: 60,
+            preguntas: 30,
+            tags: ['hardware', 'laptops', 'reparación']
+          },
+          {
+            id: 'gestion-calidad',
+            titulo: 'Gestión de Calidad',
+            archivo: 'Examenes/GestionCalidad.json',
+            descripcion: 'Examen sobre metodologías de calidad y mejora continua',
+            institucion: 'CTP Las Palmitas',
+            nivel: 'Undécimo Nivel',
+            categoria: 'Gestión',
+            dificultad: 'Avanzada',
+            duracion: 45,
+            preguntas: 30,
+            tags: ['calidad', 'mejora continua', 'scrum']
+          }
+        ];
+        examenesFiltrados = [...examenesDisponibles];
+        renderizarCatalogoExamenes();
+      }
+    }
+
+    // Renderizar catálogo de exámenes en el grid
+    function renderizarCatalogoExamenes() {
+      const grid = document.getElementById('exam-grid');
+      if (!grid) return;
+
+      if (examenesFiltrados.length === 0) {
+        grid.innerHTML = `
+          <div class="no-results">
+            <div class="no-results-icon">🔍</div>
+            <p>No se encontraron exámenes</p>
+            <p style="font-size: 13px; margin-top: 8px;">Intenta ajustar los filtros o la búsqueda</p>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = examenesFiltrados.map(examen => crearTarjetaExamen(examen)).join('');
+    }
+
+    // Crear HTML para tarjeta de examen
+    function crearTarjetaExamen(examen) {
+      const dificultadClass = `exam-badge-${examen.dificultad?.toLowerCase() || 'intermedia'}`;
+      const tagsHtml = examen.tags
+        ? `<div class="exam-tags">${examen.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}</div>`
+        : '';
+
+      return `
+        <div class="exam-card" data-id="${examen.id}">
+          <div class="exam-header">
+            <h3 class="exam-title">${examen.titulo}</h3>
+            <span class="exam-badge ${dificultadClass}">${examen.dificultad || 'Intermedia'}</span>
+          </div>
+          <p class="exam-description">${examen.descripcion || 'Sin descripción'}</p>
+          <div class="exam-meta">
+            <span class="meta-item">⏱️ ${examen.duracion || 60} min</span>
+            <span class="meta-item">📝 ${examen.preguntas || 30} preguntas</span>
+            ${examen.institucion ? `<span class="meta-item">🏫 ${examen.institucion}</span>` : ''}
+          </div>
+          ${tagsHtml}
+          <button class="btn btn-primary btn-full mt-lg" onclick="seleccionarExamen('${examen.id}')">
+            Seleccionar Examen
+          </button>
+        </div>
+      `;
+    }
+
+    // Filtrar exámenes según búsqueda y filtros
+    function filtrarExamenes() {
+      const searchTerm = document.getElementById('exam-search')?.value.toLowerCase() || '';
+      const category = document.getElementById('filter-category')?.value || '';
+      const difficulty = document.getElementById('filter-difficulty')?.value || '';
+      const duration = document.getElementById('filter-duration')?.value || '';
+
+      examenesFiltrados = examenesDisponibles.filter(examen => {
+        // Búsqueda por texto en título, descripción y tags
+        const matchesSearch = !searchTerm ||
+          examen.titulo.toLowerCase().includes(searchTerm) ||
+          (examen.descripcion && examen.descripcion.toLowerCase().includes(searchTerm)) ||
+          (examen.tags && examen.tags.some(tag => tag.toLowerCase().includes(searchTerm)));
+
+        // Filtro por categoría
+        const matchesCategory = !category ||
+          examen.categoria?.toLowerCase() === category.toLowerCase();
+
+        // Filtro por dificultad
+        const matchesDifficulty = !difficulty ||
+          examen.dificultad?.toLowerCase() === difficulty.toLowerCase();
+
+        // Filtro por duración máxima
+        const matchesDuration = !duration ||
+          (examen.duracion && examen.duracion <= parseInt(duration));
+
+        return matchesSearch && matchesCategory && matchesDifficulty && matchesDuration;
+      });
+
+      renderizarCatalogoExamenes();
+    }
+
+    // Seleccionar un examen
+    function seleccionarExamen(examId) {
+      examenSeleccionado = examenesDisponibles.find(e => e.id === examId);
+      if (!examenSeleccionado) {
+        alert('Examen no encontrado');
+        return;
+      }
+
+      // Ocultar selección, mostrar formulario
+      document.getElementById('exam-selection').classList.add('hidden');
+      document.getElementById('start-form').classList.remove('hidden');
+
+      // Actualizar información del examen
+      actualizarInformacionExamen();
+    }
+
+    // Actualizar información del examen seleccionado en el formulario
+    function actualizarInformacionExamen() {
+      const infoDiv = document.getElementById('exam-info');
+      if (!infoDiv || !examenSeleccionado) return;
+
+      infoDiv.innerHTML = `
+        <h4>${examenSeleccionado.titulo}</h4>
+        <p>${examenSeleccionado.descripcion || 'Sin descripción'}</p>
+        <div class="exam-info-meta">
+          <span>⏱️ ${examenSeleccionado.duracion || 60} min</span>
+          <span>📝 ${examenSeleccionado.preguntas || 30} preguntas</span>
+          <span>📊 ${examenSeleccionado.dificultad || 'Intermedia'}</span>
+        </div>
+      `;
+
+      // Actualizar encabezado dinámicamente
+      const header = document.querySelector('.exam-header h1');
+      const subtitle = document.querySelector('.exam-header .subtitle');
+      if (header) {
+        header.textContent = examenSeleccionado.titulo;
+      }
+      if (subtitle) {
+        subtitle.textContent = `${examenSeleccionado.institucion || 'CTP Las Palmitas'} · ${examenSeleccionado.nivel || 'Undécimo Nivel'} · ${examenSeleccionado.preguntas || 30} preguntas`;
+      }
+    }
+
+    // Cargar preguntas desde un archivo específico
+    async function loadQuestions(examFile) {
+      try {
+        const response = await fetch(examFile);
+        if (!response.ok) throw new Error('No se pudo cargar');
+
+        const data = await response.json();
+
+        // Nuevo formato con metadata
+        if (data.metadata) {
+          examMetadata = data.metadata;
+          questionsOriginal = data.preguntas;
+
+          // Actualizar configuración dinámicamente
+          EXAM_CONFIG.totalQuestions = examMetadata.preguntas_totales || questionsOriginal.length;
+          EXAM_CONFIG.timeLimit = (examMetadata.duracion_minutos || 60) * 60;
+          EXAM_CONFIG.passPercentage = examMetadata.porcentaje_aprobacion || 60;
+
+          console.log(`✅ Examen cargado: ${examMetadata.titulo}`);
+          console.log(`   Preguntas: ${questionsOriginal.length}`);
+          console.log(`   Duración: ${examMetadata.duracion_minutos} min`);
+        } else {
+          // Formato antiguo (array simple) - para backwards compatibility
+          questionsOriginal = data;
+          examMetadata = {
+            titulo: examenSeleccionado?.titulo || 'Examen Digital',
+            duracion_minutos: examenSeleccionado?.duracion || 60,
+            preguntas_totales: data.length
+          };
+          EXAM_CONFIG.totalQuestions = data.length;
+          EXAM_CONFIG.timeLimit = (examenMetadata.duracion_minutos) * 60;
+        }
+
+        questionsLoaded = true;
+      } catch (error) {
+        console.error('❌ Error al cargar examen:', error);
+        alert(`Error al cargar el examen: ${error.message}`);
+        throw error;
+      }
     }
 
     // ==================== GESTIÓN DEL EXAMEN ====================
@@ -1589,10 +1806,18 @@
       }
       
       if (!valid) return;
-      
-      // Si las preguntas no se han cargado, cargarlas primero
+
+      // Verificar que se haya seleccionado un examen
+      if (!examenSeleccionado) {
+        alert('Por favor selecciona un examen primero');
+        btn.disabled = false;
+        btn.innerHTML = 'Comenzar Examen <span>→</span>';
+        return;
+      }
+
+      // Cargar preguntas del examen seleccionado
       if (!questionsLoaded) {
-        await loadQuestions();
+        await loadQuestions(examenSeleccionado.archivo);
       }
       
       // Verificar que las preguntas se cargaron correctamente
@@ -2180,12 +2405,50 @@ ${questions.map((q, i) => {
     }
     
     // ==================== NUEVO INTENTO ====================
-    
+
     function newAttempt() {
-      if (confirm('¿Comenzar un nuevo intento? Esto reiniciará todas las respuestas.')) {
-        clearStorage();
-        location.reload();
-      }
+      clearStorage();
+
+      // Resetear estado del examen
+      examState = 'initial';
+      questionsLoaded = false;
+      questions = [];
+      answers = [];
+      correctTotal = 0;
+      examenSeleccionado = null;
+      examMetadata = {};
+      timeRemaining = EXAM_CONFIG.timeLimit;
+
+      // Resetear variables de preguntas
+      questionsOriginal = [];
+
+      // Ocultar resultados y formulario, mostrar selección de exámenes
+      document.getElementById('results').classList.add('hidden');
+      document.getElementById('review-view').classList.add('hidden');
+      document.getElementById('start-form').classList.add('hidden');
+      document.getElementById('exam-selection').classList.remove('hidden');
+      document.getElementById('student-bar').classList.add('hidden');
+      document.getElementById('progress-container').classList.add('hidden');
+      document.getElementById('exam-actions').classList.add('hidden');
+      document.getElementById('q-nav').classList.add('hidden');
+
+      // Resetear formulario
+      document.getElementById('student-name').value = '';
+      document.getElementById('student-section').value = '';
+      document.getElementById('student-id').value = '';
+
+      // Resetear encabezado
+      document.querySelector('.exam-header h1').textContent = 'Sistema de Exámenes';
+      document.querySelector('.exam-header .subtitle').textContent = 'CTP Las Palmitas · Selecciona un examen para comenzar';
+
+      // Resetear filtros y búsqueda
+      document.getElementById('exam-search').value = '';
+      document.getElementById('filter-category').value = '';
+      document.getElementById('filter-difficulty').value = '';
+      document.getElementById('filter-duration').value = '';
+
+      // Recargar catálogo
+      cargarCatalogoExamenes();
     }
     
     // ==================== EVENT LISTENERS ====================
@@ -2194,16 +2457,26 @@ ${questions.map((q, i) => {
     document.getElementById('student-id').addEventListener('input', function(e) {
       e.target.value = formatCedula(e.target.value);
     });
-    
+
     // Prevenir salida accidental
     window.onbeforeunload = function() {
       if (examState === 'in_progress') {
         return '¿Estás seguro de salir? Tu progreso se guardará automáticamente.';
       }
     };
-    
-    // Verificar si hay examen guardado al cargar
-    document.addEventListener('DOMContentLoaded', function() {
+
+    // Inicialización al cargar la página
+    document.addEventListener('DOMContentLoaded', async function() {
+      // Cargar catálogo de exámenes
+      await cargarCatalogoExamenes();
+
+      // Event listener para búsqueda en tiempo real
+      const searchInput = document.getElementById('exam-search');
+      if (searchInput) {
+        searchInput.addEventListener('input', filtrarExamenes);
+      }
+
+      // Verificar si hay examen guardado al cargar
       const savedData = getStorageData();
       if (savedData && savedData.examState === 'in_progress') {
         // Mostrar opción de continuar
