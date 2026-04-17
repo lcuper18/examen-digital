@@ -1442,21 +1442,6 @@
     // ==================== CARGAR PREGUNTAS DESDE JSON ====================
     let questionsOriginal = [];
     let questionsLoaded = false;
-    
-    // Función para cargar preguntas desde archivo JSON
-    async function loadQuestions() {
-      try {
-        const response = await fetch('preguntas.json');
-        if (!response.ok) throw new Error('No se pudo cargar');
-        questionsOriginal = await response.json();
-        console.log(`✅ Cargadas ${questionsOriginal.length} preguntas desde preguntas.json`);
-        console.log(`   Tema: ${questionsOriginal[0].tema}`);
-        questionsLoaded = true;
-      } catch (error) {
-        console.error('❌ Error al cargar preguntas.json:', error);
-        alert('Error al cargar preguntas.json. Verifica que el archivo esté en la misma carpeta.');
-      }
-    }
 
     // ==================== ESTADO DEL EXAMEN ====================
     let questions = [];
@@ -1810,8 +1795,6 @@
       // Verificar que se haya seleccionado un examen
       if (!examenSeleccionado) {
         alert('Por favor selecciona un examen primero');
-        btn.disabled = false;
-        btn.innerHTML = 'Comenzar Examen <span>→</span>';
         return;
       }
 
@@ -1900,7 +1883,15 @@
       const temas = {};
       questions.forEach((q, i) => {
         if (!temas[q.tema]) temas[q.tema] = [];
-        temas[q.tema].push({ ...q, idx: i });
+        // Normalize question object to match code expectations (q.q, q.opts, q.ans)
+        const normalizedQ = {
+          ...q,
+          idx: i,
+          q: q.texto, // JSON has 'texto', code expects 'q'
+          opts: q.opciones.map(opt => opt.texto), // JSON has opciones[].texto, code expects opts[]
+          ans: q.respuesta_correcta // JSON has 'respuesta_correcta', code expects 'ans'
+        };
+        temas[q.tema].push(normalizedQ);
       });
       
       Object.entries(temas).forEach(([tema, qs]) => {
@@ -2177,7 +2168,6 @@
       // Actualizar UI de resultados
       const icon = percentage >= 60 ? '🎉' : '📚';
       document.getElementById('results-icon').textContent = icon;
-      document.getElementById('results-number').textContent = `${correctTotal}/${questions.length}`;
       document.getElementById('score-number').textContent = `${correctTotal}/${questions.length}`;
       
       const gradeEl = document.getElementById('grade-letter');
